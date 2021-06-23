@@ -1,0 +1,36 @@
+.form_row {
+  display: flex;
+  justify-content: space-between;
+}
+.auth_input_file {
+  display: none;
+}
+.image_btn {
+  position: relative;
+  left: 70px;
+  bottom: 25px;
+  z-index: 1;
+}
+
+.auth_input {
+  background-color: #2f3941;
+  color: white;
+  padding: 4%;
+  border: none;
+  margin: 0 3% 3% 0;
+  font-size: 15px;
+}
+
+.auth_btn {
+  width: 55px;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: rgb(255 255 255);
+}
+
+::-webkit-input-placeholder {
+  color: #606870;
+}

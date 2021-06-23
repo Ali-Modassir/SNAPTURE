@@ -1,0 +1,72 @@
+.auth_container {
+  background-image: linear-gradient(
+    to left bottom,
+    #170736,
+    #180834,
+    #180833,
+    #190931,
+    #190a30,
+    #1f0c32,
+    #260d34,
+    #2d0e36,
+    #3d0e3a,
+    #4c0d3c,
+    #5c0c3c,
+    #6b0b3b
+  );
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth_card {
+  width: 80%;
+  height: 70%;
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 40px;
+  max-width: 1100px;
+}
+.card_left {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-right: 2px solid black;
+}
+
+.card_right {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: rgb(31 39 47);
+}
+
+.largeFont {
+  color: white;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.smallFont {
+  color: white;
+  font-size: 0.8rem;
+}
+
+.oauthbtn {
+  display: inline-block;
+  border: 0.8px solid rgb(48, 1, 9);
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+  padding: 4% 4% 4% 4%;
+  font-size: 0.7rem;
+  width: 150px;
+  margin: 3px;
+}
