@@ -23,9 +23,9 @@ const FormContainer = () => {
   // fileReader.readAsDataURL(file);
 
   return (
-    <div>
+    <div className={classes.form_container}>
       <form onSubmit={authFormSubmitHandler}>
-        <input
+        {/* <input
           type="file"
           name="profilePic"
           accept=".png,.jpeg,.jpg"
@@ -59,7 +59,7 @@ const FormContainer = () => {
               padding: "5px",
             }}
           />
-        </label>
+        </label> */}
         <div className={classes.form_row}>
           <input
             type="text"

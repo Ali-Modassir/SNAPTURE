@@ -1,1 +1,9 @@
 profilePic update and preview
+
+
+
+font-family: 'Alegreya', serif;
+font-family: 'BioRhyme', serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Rakkas', cursive;
+font-family: 'Varela', sans-serif;

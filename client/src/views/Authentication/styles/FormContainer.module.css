@@ -1,7 +1,15 @@
+.form_container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .form_row {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  width: 100%;
 }
+
 .auth_input_file {
   display: none;
 }
@@ -19,6 +27,7 @@
   border: none;
   margin: 0 3% 3% 0;
   font-size: 15px;
+  width: 100%;
 }
 
 .auth_btn {
@@ -27,10 +36,22 @@
   border: none;
   border-radius: 5px;
   font-weight: bold;
-  font-size: 15px;
+  /* font-size: 15px; */
   background-color: rgb(255 255 255);
 }
 
 ::-webkit-input-placeholder {
   color: #606870;
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 768px) {
+  .form_row {
+    flex-wrap: wrap;
+  }
+  .form_container {
+    width: 80%;
+  }
 }
