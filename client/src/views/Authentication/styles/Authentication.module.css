@@ -23,11 +23,12 @@
 
 .auth_card {
   width: 80%;
-  height: 70%;
+  height: 80%;
   display: flex;
   justify-content: space-between;
   border-radius: 50px;
   max-width: 1100px;
+  border-radius: 50px;
 }
 .card_left {
   width: 40%;
@@ -57,7 +58,7 @@
 
 .card_right img {
   position: absolute;
-  top: 105px;
+  top: 60px;
   height: 190px;
 }
 
@@ -97,7 +98,7 @@
   color: black;
   margin: 8px;
   text-align: center;
-  width: 200px;
+  width: 230px;
   padding: 3px 12px 3px 12px;
   font-family: "Varela", sans-serif;
   font-weight: bold;
@@ -105,7 +106,29 @@
   border: none;
 }
 
+.oauth_p {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.oauth_logo {
+  display: flex;
+}
+
+.authfooter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80%;
+}
+
 @media (max-width: 1024px) {
+  .card_right img {
+    display: none;
+  }
+  .largeFont_top {
+    margin-top: 20px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -122,10 +145,13 @@
   .oauth_text {
     display: none;
   }
-  .largeFont {
-    font-size: 22px;
+  .largeFont_top {
+    font-size: 20px;
   }
   .smallFont {
-    font-size: medium;
+    font-size: small;
+  }
+  .authfooter {
+    align-items: center;
   }
 }

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
 import classes from "./styles/Authentication.module.css";
 //components
-import FormContainer from "./components/FormContainer";
+import SignUpFormContainer from "./components/SignUpFormContainer";
+import LoginFormContainer from "./components/LoginFormContainer";
 
 import AuthHomePic from "../../assets/img/AuthHomePic.jpg";
 import Brandlogo from "../../assets/img/BrandLogo.png";
@@ -12,6 +13,8 @@ import GoogleIcon from "@material-ui/icons/Google";
 
 const Authentication = () => {
   console.log(AuthHomePic);
+
+  const [authType, setAuthType] = useState("signin");
 
   return (
     <div className={classes.auth_container}>
@@ -28,18 +31,43 @@ const Authentication = () => {
               <div className={classes.oauth_logo}>
                 <GoogleIcon fontSize="large" />
               </div>
-              <div className={classes.oauth_text}>Signin With Apple</div>
+              <div className={classes.oauth_text}>Continue With Apple</div>
             </button>
             <button className={classes.oauth_btn}>
               <div className={classes.oauth_logo}>
                 <AppleIcon fontSize="large" />
               </div>
-              <div className={classes.oauth_text}>Signin With Google</div>
+              <div className={classes.oauth_text}>Continue With Google</div>
             </button>
           </div>
-          <FormContainer />
-          <div className={classes.smallFont}>
-            Not a member yet? Register Now
+          {authType === "signin" ? (
+            <LoginFormContainer />
+          ) : (
+            <SignUpFormContainer />
+          )}
+          <div className={classes.authfooter}>
+            {authType === "signin" ? (
+              <div className={classes.smallFont}>
+                Not a member yet ?{" "}
+                <p
+                  className={classes.oauth_p}
+                  onClick={() => setAuthType("signup")}
+                >
+                  Register Now
+                </p>
+              </div>
+            ) : (
+              <div className={classes.smallFont}>
+                Already Registered ?{" "}
+                <p
+                  className={classes.oauth_p}
+                  onClick={() => setAuthType("signin")}
+                >
+                  Login
+                </p>
+              </div>
+            )}
+            <div className={classes.smallFont}>Forgot Password ?</div>
           </div>
         </div>
       </div>
