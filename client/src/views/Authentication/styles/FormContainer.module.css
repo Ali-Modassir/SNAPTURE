@@ -56,4 +56,11 @@
   .form_container {
     width: 80%;
   }
+  .auth_btn {
+    width: 50px;
+    height: 30px;
+  }
+  .auth_input {
+    padding: 7%;
+  }
 }

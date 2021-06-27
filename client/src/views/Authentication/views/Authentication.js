@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-import classes from "./styles/Authentication.module.css";
+import classes from "../styles/Authentication.module.css";
 //components
-import SignUpFormContainer from "./components/SignUpFormContainer";
-import LoginFormContainer from "./components/LoginFormContainer";
+import SignUpFormContainer from "../components/SignUpFormContainer";
+import LoginFormContainer from "../components/LoginFormContainer";
 
-import AuthHomePic from "../../assets/img/AuthHomePic.jpg";
-import Brandlogo from "../../assets/img/BrandLogo.png";
+import AuthHomePic from "../../../assets/img/AuthHomePic.jpg";
+import Brandlogo from "../../../assets/img/BrandLogo.png";
 
-import AppleIcon from "@material-ui/icons/Apple";
-import GoogleIcon from "@material-ui/icons/Google";
+import GoogleIcon from "../../../assets/icons/google.gif";
+import AppleIcon from "../../../assets/icons/apple.gif";
 
 const Authentication = () => {
   console.log(AuthHomePic);
@@ -23,21 +23,29 @@ const Authentication = () => {
           <img src={AuthHomePic} alt="AuthBrandPic" />
         </div>
         <div className={classes.card_right}>
-          <img src={Brandlogo} alt="brandLogo" />
+          <img src={Brandlogo} alt="brandLogo" className={classes.brandlogo} />
           <div className={classes.largeFont_top}>Login to Your Account</div>
           <div className={classes.smallFont}>Your Own Digital Campaign</div>
           <div className={classes.oauth_btns}>
             <button className={classes.oauth_btn}>
               <div className={classes.oauth_logo}>
-                <GoogleIcon fontSize="large" />
+                <img
+                  src={GoogleIcon}
+                  alt="Continue with Google"
+                  className={classes.svgIcons}
+                />
               </div>
-              <div className={classes.oauth_text}>Continue With Apple</div>
+              <div className={classes.oauth_text}>Continue With Google</div>
             </button>
             <button className={classes.oauth_btn}>
               <div className={classes.oauth_logo}>
-                <AppleIcon fontSize="large" />
+                <img
+                  src={AppleIcon}
+                  alt="Continue with Apple"
+                  className={classes.svgIcons}
+                />
               </div>
-              <div className={classes.oauth_text}>Continue With Google</div>
+              <div className={classes.oauth_text}>Continue With Apple</div>
             </button>
           </div>
           {authType === "signin" ? (
@@ -67,7 +75,11 @@ const Authentication = () => {
                 </p>
               </div>
             )}
-            <div className={classes.smallFont}>Forgot Password ?</div>
+            <div className={classes.smallFont}>
+              <a href="/auth/forgotPassword" className={classes.link}>
+                Forgot Password ?
+              </a>
+            </div>
           </div>
         </div>
       </div>

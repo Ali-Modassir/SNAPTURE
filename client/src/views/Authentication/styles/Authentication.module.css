@@ -56,10 +56,15 @@
   background-color: rgb(31 39 47);
 }
 
-.card_right img {
+.brandlogo {
   position: absolute;
   top: 60px;
   height: 190px;
+}
+
+.svgIcons {
+  height: 35px;
+  font-weight: bold;
 }
 
 .largeFont_top {
@@ -122,8 +127,13 @@
   width: 80%;
 }
 
+.link {
+  text-decoration: none;
+  color: white;
+}
+
 @media (max-width: 1024px) {
-  .card_right img {
+  .brandlogo {
     display: none;
   }
   .largeFont_top {
@@ -153,5 +163,8 @@
   }
   .authfooter {
     align-items: center;
+  }
+  .auth_card {
+    height: 70%;
   }
 }
