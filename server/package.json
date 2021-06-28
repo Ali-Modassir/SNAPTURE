@@ -1,0 +1,23 @@
+{
+  "name": "snapture-server",
+  "version": "1.0.0",
+  "description": "Server of SnapTure by Modassir Ali",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "author": "Modassir Ali",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.0",
+    "bcrypt": "^5.0.1",
+    "crypto": "^1.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.15",
+    "nodemailer": "^6.6.2",
+    "validator": "^13.6.0"
+  }
+}
