@@ -89,22 +89,26 @@ module.exports.confirmEmail = async (req, res, next) => {
   const { id } = req.params;
   try {
     const user = await User.findById(id);
-    if (user && !user.local.confirmed) {
-      user.local.confirmed = true;
-      user.save();
-      const token = createToken(confirmedUser._id);
-      return res.json({
-        userId: confirmedUser._id,
-        userName: confirmedUser.local.name,
-        userEmail: confirmedUser.local.email,
-        token: token,
-        ok: true,
-        message: "Email Confirmed, Account Successfully Created",
-      });
-    } else {
-      if (!user) return res.json({ message: "User Not found", ok: false });
-      else return res.json({ message: "Email Already Confirmed", ok: false });
-    }
+    if (!user) return res.json({ message: "User Not found", ok: false });
+    if (user.local.confirmed)
+      res.json({ message: "Email Already Confirmed, Please Login", ok: false });
+    await UserModel.User.findOneAndUpdate(
+      { _id: user._id },
+      {
+        $set: {
+          "local.confirmed": true,
+        },
+      }
+    );
+    const token = createToken(confirmedUser._id);
+    return res.json({
+      userId: confirmedUser._id,
+      userName: confirmedUser.local.name,
+      userEmail: confirmedUser.local.email,
+      token: token,
+      ok: true,
+      message: "Email Confirmed, Account Successfully Created",
+    });
   } catch (err) {
     const errors = handleErrors(err);
     return next(errors);
@@ -116,6 +120,9 @@ module.exports.login_post = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.login(email, password);
+    if (user === "Incorrect Password!!!" || user === "Incorrect Email!!!") {
+      return res.json({ ok: false, message: user });
+    }
     if (!user.local.confirmed) {
       return res.status(403).json({
         message: "Email not Confirmed. Please check your email account",
@@ -133,6 +140,7 @@ module.exports.login_post = async (req, res, next) => {
       });
     }
   } catch (err) {
+    console.log(err);
     const errors = handleErrors(err);
     return next(errors);
   }

@@ -1,14 +1,47 @@
-import React from "react";
+import React, { useContext } from "react";
+import { toast } from "react-toastify";
+import { CircularProgress } from "@material-ui/core";
+
+//hook
+import { useHttpClient } from "../../../customHooks/httpHook";
+//context
+import { AuthContext } from "../../../context/authContext";
 
 //css
 import classes from "../styles/FormContainer.module.css";
 
 const LoginFormContainer = () => {
-  //formSubmit Handler
+  const auth = useContext(AuthContext);
+  const { sendRequest, isLoading } = useHttpClient();
+
+  //FormSubmitHandler
   const authFormSubmitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    console.log(formData);
+    setTimeout(() => {
+      sendRequest(
+        process.env.REACT_APP_BASE_URL + "/auth/login",
+        "POST",
+        JSON.stringify(Object.fromEntries(formData)),
+        {
+          "Content-Type": "application/json",
+        }
+      )
+        .then((res) => {
+          if (res.ok) {
+            toast.success("Logged In", { position: "top-right" });
+            auth.login(res.userName, res.userEmail, res.userId, res.token);
+          } else {
+            toast.warn(res.message, { position: "top-right" });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Something went wrong, Please try again", {
+            position: "top-right",
+          });
+        });
+    }, 500);
   };
 
   return (
@@ -30,9 +63,13 @@ const LoginFormContainer = () => {
             className={classes.auth_input}
           />
         </div>
-        <button type="submit" className={classes.auth_btn}>
-          &gt;&gt;
-        </button>
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <button type="submit" className={classes.auth_btn}>
+            &gt;&gt;
+          </button>
+        )}
       </form>
     </div>
   );

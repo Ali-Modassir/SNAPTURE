@@ -58,22 +58,23 @@ const userSchema = new mongoose.Schema({
 });
 
 //incrypting password
-userSchema.pre("save", async (next) => {
+userSchema.pre("save", async function (next) {
   if (this.method != "local") next();
-  const salt = await bcrypt.genSalt();
-  this.local.password = await bcrypt.hash(this.local.password, salt);
+  const salt = await bcrypt.genSalt(10);
+  const password = this.local.password;
+  this.local.password = await bcrypt.hash(password, salt);
   next();
 });
 
 // static method to login user
-userSchema.statics.login = async (email, password) => {
+userSchema.statics.login = async function (email, password) {
   const user = await this.findOne({ "local.email": email });
   if (user) {
     const auth = await bcrypt.compare(password, user.local.password);
     if (auth) return user;
-    throw Error("Incorrect Password!!!");
+    return "Incorrect Password!!!";
   }
-  throw Error("Incorrect Email");
+  return "Incorrect Email!!!";
 };
 
 const User = mongoose.model("user", userSchema);

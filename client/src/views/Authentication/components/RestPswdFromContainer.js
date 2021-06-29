@@ -1,12 +1,45 @@
 import React from "react";
 import classes from "../styles/FormContainer.module.css";
+import { toast } from "react-toastify";
+import { CircularProgress } from "@material-ui/core";
+import { useHistory, useParams } from "react-router-dom";
+
+//hook
+import { useHttpClient } from "../../../customHooks/httpHook";
 
 const RestPswdFromContainer = () => {
+  const { sendRequest, isLoading } = useHttpClient();
+  const history = useHistory();
+  const { resetToken } = useParams();
+
   //formSubmit Handler
   const authFormSubmitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    console.log(formData);
+    setTimeout(() => {
+      sendRequest(
+        process.env.REACT_APP_BASE_URL + "/auth/email/reset/" + resetToken,
+        "POST",
+        JSON.stringify(Object.fromEntries(formData)),
+        {
+          "Content-Type": "application/json",
+        }
+      )
+        .then((res) => {
+          if (res.ok) {
+            toast.success(res.message, { position: "top-right" });
+            history.push("/auth");
+          } else {
+            toast.warn(res.message, { position: "top-right" });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Something went wrong, Please try again", {
+            position: "top-right",
+          });
+        });
+    }, 500);
   };
 
   return (
@@ -14,7 +47,7 @@ const RestPswdFromContainer = () => {
       <form onSubmit={authFormSubmitHandler}>
         <div className={classes.form_row}>
           <input
-            type="text"
+            type="password"
             placeholder="Enter New Password"
             name="password"
             className={classes.auth_input}
@@ -22,15 +55,19 @@ const RestPswdFromContainer = () => {
         </div>
         <div className={classes.form_row}>
           <input
-            type="text"
+            type="password"
             placeholder="Retype New Password"
             name="confirmPassword"
             className={classes.auth_input}
           />
         </div>
-        <button type="submit" className={classes.auth_btn}>
-          &gt;&gt;
-        </button>
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <button type="submit" className={classes.auth_btn}>
+            &gt;&gt;
+          </button>
+        )}
       </form>
     </div>
   );
