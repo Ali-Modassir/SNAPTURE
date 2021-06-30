@@ -9,11 +9,10 @@ import AuthHomePic from "../../../assets/img/AuthHomePic.jpg";
 import Brandlogo from "../../../assets/img/BrandLogo.png";
 
 import GoogleIcon from "../../../assets/icons/google.gif";
-import AppleIcon from "../../../assets/icons/apple.gif";
+import FacebookIcon from "../../../assets/icons/facebook.gif";
+import MicrosoftIcon from "../../../assets/icons/microsoft.gif";
 
 const Authentication = () => {
-  console.log(AuthHomePic);
-
   const [authType, setAuthType] = useState("signin");
 
   return (
@@ -27,26 +26,42 @@ const Authentication = () => {
           <div className={classes.largeFont_top}>Login to Your Account</div>
           <div className={classes.smallFont}>Your Own Digital Campaign</div>
           <div className={classes.oauth_btns}>
-            <button className={classes.oauth_btn}>
-              <div className={classes.oauth_logo}>
-                <img
-                  src={GoogleIcon}
-                  alt="Continue with Google"
-                  className={classes.svgIcons}
-                />
-              </div>
-              <div className={classes.oauth_text}>Continue With Google</div>
-            </button>
-            <button className={classes.oauth_btn}>
-              <div className={classes.oauth_logo}>
-                <img
-                  src={AppleIcon}
-                  alt="Continue with Apple"
-                  className={classes.svgIcons}
-                />
-              </div>
-              <div className={classes.oauth_text}>Continue With Apple</div>
-            </button>
+            <a
+              href={`${process.env.REACT_APP_SERVER_URL}/auth/google`}
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <button className={classes.oauth_btn}>
+                <div className={classes.oauth_logo}>
+                  <img
+                    src={GoogleIcon}
+                    alt="Continue with Google"
+                    className={classes.svgIcons}
+                  />
+                </div>
+                <div className={classes.oauth_text}>Continue With Google</div>
+              </button>
+            </a>
+            <a
+              href={`${process.env.REACT_APP_SERVER_URL}/auth/microsoft`}
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <button className={classes.oauth_btn}>
+                <div className={classes.oauth_logo}>
+                  <img
+                    src={MicrosoftIcon}
+                    alt="Continue with Microsoft"
+                    className={classes.svgIcons_google}
+                  />
+                </div>
+                <div className={classes.oauth_text}>
+                  Continue With Microsoft
+                </div>
+              </button>
+            </a>
           </div>
           {authType === "signin" ? (
             <LoginFormContainer />

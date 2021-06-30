@@ -63,6 +63,10 @@
 }
 
 .svgIcons {
+  height: 40px;
+  font-weight: bold;
+}
+.svgIcons_google {
   height: 35px;
   font-weight: bold;
 }
@@ -103,7 +107,7 @@
   color: black;
   margin: 8px;
   text-align: center;
-  width: 230px;
+  width: 250px;
   padding: 3px 12px 3px 12px;
   font-family: "Varela", sans-serif;
   font-weight: bold;

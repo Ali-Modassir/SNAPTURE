@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
   method: {
     type: String,
-    enum: ["local", "google", "apple"],
+    enum: ["local", "google", "facebook"],
     required: true,
   },
 
@@ -40,8 +40,7 @@ const userSchema = new mongoose.Schema({
       default: "",
     },
   },
-
-  apple: {
+  microsoft: {
     id: {
       type: String,
       default: "",

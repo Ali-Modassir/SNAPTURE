@@ -14,7 +14,6 @@ export const useAuth = () => {
     (userType, uname, uemail, uid, token, expirationDate) => {
       setToken(token);
       setUserId(uid);
-      setUserType(userType);
       setUserEmail(uemail);
       setUserName(uname);
       const tokenExpirationDate =

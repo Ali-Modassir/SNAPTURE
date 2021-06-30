@@ -242,17 +242,22 @@ module.exports.resetPassword = async (req, res, next) => {
 //get user_details_by_id
 module.exports.getUser = async (req, res, next) => {
   const { id } = req.params;
-  const user = await UserModel.User.findById(id);
-  if (user) {
-    const jwttoken = createToken(id);
-    const data = {
-      userName: user.local.name,
-      userEmail: user.local.email,
-      userId: id,
-      token: jwttoken,
-    };
-    res.json(data);
-  } else {
-    res.json({ message: "User Not found", ok: false });
+  try {
+    const user = await User.findById(id);
+    if (user) {
+      const jwttoken = createToken(id);
+      const data = {
+        userName: user.local.name,
+        userEmail: user.local.email,
+        userId: id,
+        token: jwttoken,
+        ok: true,
+      };
+      res.json(data);
+    } else {
+      res.json({ message: "User Not found", ok: false });
+    }
+  } catch (error) {
+    console.log(error);
   }
 };

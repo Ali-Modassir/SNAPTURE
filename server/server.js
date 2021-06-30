@@ -1,12 +1,19 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const passport = require("passport");
 
 const authRoutes = require("./routes/authRoutes");
+const oAuthRoutes = require("./routes/oAuthRoutes");
 
 const app = express();
 
 app.use(express.json());
+
+//Initializing Passport
+app.use(passport.initialize());
+//passport template
+require("./config/passport");
 
 //CORS Policy
 app.use((req, res, next) => {
@@ -21,6 +28,7 @@ app.use((req, res, next) => {
 
 //Routes
 app.use("/api/auth", authRoutes);
+app.use("/", oAuthRoutes);
 
 // For any unknown API request
 app.use((error, req, res, next) => {
