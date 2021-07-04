@@ -8,7 +8,7 @@ const PostCard = ({ imgSrc }) => {
       <img src={imgSrc} alt="post" className={style.image} />
       <div className={style.postCardDetails}>
         <div className={style.like}>
-          <FavoriteIcon />
+          <FavoriteIcon style={{ color: "white" }} />
           <div className={style.count}>1.1K</div>
         </div>
       </div>

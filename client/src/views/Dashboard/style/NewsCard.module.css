@@ -1,18 +1,17 @@
 .contentWrapper {
-  margin: 0 auto;
-  max-width: 1200px;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 0.5rem;
+  width: 80%;
 }
 
 .newsCard {
   border: 0px solid aqua;
   margin: 0.5rem;
   position: relative;
-  height: 12rem;
-  width: 380px;
+  height: 750px;
+  width: 100%;
   overflow: hidden;
   border-radius: 0.5rem;
   flex: 1;
