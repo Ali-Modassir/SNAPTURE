@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: auto auto;
+  background-image: linear-gradient(
+    to left bottom,
+    #170736,
+    #180834,
+    #180833,
+    #190931,
+    #190a30,
+    #1f0c32,
+    #260d34,
+    #2d0e36,
+    #3d0e3a,
+    #4c0d3c,
+    #5c0c3c,
+    #6b0b3b
+  );
+}
+
+.middle {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import ForgotPassword from "./views/Authentication/views/ForgotPassword";
 import ResetPassword from "./views/Authentication/views/ResetPassword";
+import DashLayout from "./views/Dashboard/DashLayout";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -53,6 +54,7 @@ const App = () => {
               component={ResetPassword}
             />
             <Route path="/auth/:token" component={OAuth} />
+            <Route path="/dash" component={DashLayout} />
             <Redirect to="/auth" />
           </Switch>
         </Router>

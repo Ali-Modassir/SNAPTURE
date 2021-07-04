@@ -1,0 +1,30 @@
+.container {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  align-items: center;
+  margin-bottom: 60px;
+  color: white;
+}
+.routeName {
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-family: "Rakkas";
+}
+.userName {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+@media (max-width: 500px) {
+  .userName {
+    display: none;
+  }
+  .container {
+    width: 70%;
+  }
+  .routeName {
+    font-size: 2.2rem;
+  }
+}
