@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ArrowBackIos, ArrowForwardIos } from "@material-ui/icons";
-import "../../../style/NewsScroll.css";
+import style from "../../../style/NewsScroll.module.css";
+import DoubleArrowRoundedIcon from "@material-ui/icons/DoubleArrowRounded";
 
 export default (props) => {
   const [activeSlide, setactiveSlide] = useState(props.activeSlide);
@@ -57,11 +57,11 @@ export default (props) => {
 
   return (
     <>
-      <div className="slideC">
+      <div className={style.slideC}>
         {props.contents.map((item, i) => (
           <React.Fragment key={i}>
             <div
-              className="slide"
+              className={style.slide}
               style={{
                 ...getStyles(i),
               }}
@@ -71,11 +71,19 @@ export default (props) => {
           </React.Fragment>
         ))}
       </div>
-      {/* carousel */}
 
-      <div className="btns">
-        <ArrowBackIos onClick={prev} className="btn" />
-        <ArrowForwardIos onClick={next} className="btn" />
+      <div className={style.btns}>
+        <DoubleArrowRoundedIcon
+          onClick={prev}
+          className={style.btn}
+          fontSize="large"
+          style={{ transform: "rotate(180deg)" }}
+        />
+        <DoubleArrowRoundedIcon
+          onClick={next}
+          className={style.btn}
+          fontSize="large"
+        />
       </div>
     </>
   );

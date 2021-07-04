@@ -137,3 +137,15 @@
   left: 0.5rem;
   color: yellow;
 }
+
+@media (max-width: 400px) {
+  .contentWrapper {
+    width: 98%;
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .newsCard {
+    height: 350px;
+  }
+}

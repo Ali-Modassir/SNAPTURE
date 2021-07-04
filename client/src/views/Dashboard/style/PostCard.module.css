@@ -31,3 +31,19 @@
   margin-left: 10px;
   color: white;
 }
+
+@media (max-width: 400px) {
+  .container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .image {
+    width: 98%;
+    border: none;
+  }
+  .container:hover {
+    transform: none;
+  }
+}

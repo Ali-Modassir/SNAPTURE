@@ -1,7 +1,6 @@
 import React from "react";
 import style from "../style/RightSidebar.module.css";
 import PersonImg from "../../../assets/img/PersonImg.webp";
-import { Button } from "@material-ui/core";
 
 const RightSidebar = () => {
   return (
@@ -26,7 +25,9 @@ const RightSidebar = () => {
           </div>
         </div>
       </div>
-      <div className={style.suggestionBox}></div>
+      <div className={style.createPost}>
+        <button className={style.createPostBtn}>CREATE POST</button>
+      </div>
     </div>
   );
 };
