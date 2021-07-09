@@ -1,35 +1,78 @@
 .container {
-  width: 100%;
+  max-width: 100%;
   margin: 30px;
+  margin-left: 0;
   transition: transform 0.5s;
+  max-width: 1000px;
 }
 .container:hover {
   transform: scale(1.1);
 }
 
+.profileDetails {
+  width: 80%;
+  display: flex;
+  background-image: radial-gradient(
+    circle 1224px at 10.6% 8.8%,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(153, 202, 251, 1) 100.2%
+  );
+  border-radius: 10px 10px 0 0;
+  align-items: center;
+}
+.profileName {
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+}
+
 .image {
   width: 80%;
   object-fit: contain;
-  border: 3px solid white;
-  border-radius: 10px;
-  box-shadow: 18px 21px 42px -4px rgba(0, 0, 0, 0.46);
-  -webkit-box-shadow: 18px 21px 42px -4px rgba(0, 0, 0, 0.46);
-  -moz-box-shadow: 18px 21px 42px -4px rgba(0, 0, 0, 0.46);
+  border-top: none;
+  border-bottom: none;
+}
+
+.postCardDetails {
+  background-image: radial-gradient(
+    circle 1224px at 10.6% 8.8%,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(153, 202, 251, 1) 100.2%
+  );
+  width: 78%;
+  margin-top: 0;
+  border-radius: 0 0 10px 10px;
+  padding: 1%;
+  overflow-x: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.caption {
+  font-size: 1.2rem;
+  padding: 0 10px 10px 10px;
+  max-width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  word-break: break-all;
+  color: black;
 }
 
 .like {
   display: flex;
-  width: 18%;
   align-items: center;
-  margin-left: 30px;
-  margin-top: 10px;
+  padding-left: 10px;
 }
 
 .count {
   font-family: "Monstrett";
   font-size: 1.2rem;
   margin-left: 10px;
-  color: white;
+  color: rgb(94, 72, 72);
 }
 
 @media (max-width: 400px) {

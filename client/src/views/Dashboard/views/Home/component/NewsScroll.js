@@ -20,37 +20,37 @@ export default (props) => {
     else if (activeSlide - 1 === index)
       return {
         opacity: 1,
-        transform: "translateX(-400px) translateZ(-400px) rotateY(35deg)",
+        transform: "translateX(-240px) translateZ(-400px) rotateY(35deg)",
         zIndex: 9,
       };
     else if (activeSlide + 1 === index)
       return {
         opacity: 1,
-        transform: "translateX(400px) translateZ(-400px) rotateY(-35deg)",
+        transform: "translateX(240px) translateZ(-400px) rotateY(-35deg)",
         zIndex: 9,
       };
     else if (activeSlide - 2 === index)
       return {
         opacity: 1,
-        transform: "translateX(-400px) translateZ(-500px) rotateY(35deg)",
+        transform: "translateX(-240px) translateZ(-500px) rotateY(35deg)",
         zIndex: 8,
       };
     else if (activeSlide + 2 === index)
       return {
         opacity: 1,
-        transform: "translateX(480px) translateZ(-500px) rotateY(-35deg)",
+        transform: "translateX(240px) translateZ(-500px) rotateY(-35deg)",
         zIndex: 8,
       };
     else if (index < activeSlide - 2)
       return {
         opacity: 0,
-        transform: "translateX(-480px) translateZ(-500px) rotateY(35deg)",
+        transform: "translateX(-240px) translateZ(-500px) rotateY(35deg)",
         zIndex: 7,
       };
     else if (index > activeSlide + 2)
       return {
         opacity: 0,
-        transform: "translateX(480px) translateZ(-500px) rotateY(-35deg)",
+        transform: "translateX(240px) translateZ(-500px) rotateY(-35deg)",
         zIndex: 7,
       };
   };

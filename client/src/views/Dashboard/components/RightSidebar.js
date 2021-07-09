@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "../style/RightSidebar.module.css";
 import PersonImg from "../../../assets/img/PersonImg.webp";
+import { Modal, Grow, Fade, Slide, Zoom } from "@material-ui/core";
+import PostModal from "../views/Home/component/PostModal";
 
 const RightSidebar = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const modalOpenHandler = () => setModalOpen(true);
+  const modalCloseHandler = () => setModalOpen(false);
+
   return (
     <div className={style.container}>
       <div className={style.profileCard}>
@@ -26,7 +32,18 @@ const RightSidebar = () => {
         </div>
       </div>
       <div className={style.createPost}>
-        <button className={style.createPostBtn}>CREATE POST</button>
+        <button className={style.createPostBtn} onClick={modalOpenHandler}>
+          CREATE POST
+        </button>
+        <Modal open={modalOpen} onClose={modalCloseHandler}>
+          <Grow
+            in={modalOpen}
+            style={{ transformOrigin: "0 0 0" }}
+            {...(!modalOpen && { timeout: 1000 })}
+          >
+            <PostModal />
+          </Grow>
+        </Modal>
       </div>
     </div>
   );

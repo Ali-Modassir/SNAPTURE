@@ -1,0 +1,101 @@
+.container {
+  background-image: linear-gradient(
+    113.3deg,
+    rgba(217, 9, 27, 1) 6.9%,
+    rgba(22, 68, 150, 1) 75%
+  );
+  display: flex;
+  width: 30%;
+  height: 70%;
+  margin: auto auto;
+  margin-top: 17vh;
+  border-radius: 100px;
+  min-width: 350px;
+}
+
+.container form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.caption {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
+}
+.captionLabel {
+  margin: 10px;
+  color: black;
+  font-size: 1.2rem;
+  color: wheat;
+}
+.caption_input {
+  width: 90%;
+  font-size: 1.2rem;
+  padding: 3%;
+  border-radius: 20px;
+  border: 4px solid orangered;
+  color: yellow;
+  background-image: linear-gradient(
+    to left bottom,
+    #170736,
+    #180834,
+    #180833,
+    #190931,
+    #190a30,
+    #1f0c32,
+    #260d34,
+    #2d0e36,
+    #3d0e3a,
+    #4c0d3c,
+    #5c0c3c,
+    #6b0b3b
+  );
+}
+
+.image {
+  margin-top: 50px;
+}
+
+.image_file {
+  display: none;
+}
+.image_btn {
+  position: relative;
+  left: -20px;
+  bottom: 22px;
+  z-index: 1;
+}
+
+.addPostBtn {
+  background-image: linear-gradient(
+    to right,
+    #c21500 0%,
+    #ffc500 51%,
+    #c21500 100%
+  );
+  margin: 10px;
+  padding: 15px 35px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #190931;
+  border-radius: 10px;
+  display: block;
+  border: none;
+}
+
+.addPostBtn:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
