@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/SNAPTURE/static/css/main.d5c86942.chunk.css",
+    "main.js": "/SNAPTURE/static/js/main.f7086a8f.chunk.js",
+    "main.js.map": "/SNAPTURE/static/js/main.f7086a8f.chunk.js.map",
+    "runtime-main.js": "/SNAPTURE/static/js/runtime-main.da002678.js",
+    "runtime-main.js.map": "/SNAPTURE/static/js/runtime-main.da002678.js.map",
+    "static/css/2.97503911.chunk.css": "/SNAPTURE/static/css/2.97503911.chunk.css",
+    "static/js/2.2b178037.chunk.js": "/SNAPTURE/static/js/2.2b178037.chunk.js",
+    "static/js/2.2b178037.chunk.js.map": "/SNAPTURE/static/js/2.2b178037.chunk.js.map",
+    "index.html": "/SNAPTURE/index.html",
+    "static/css/2.97503911.chunk.css.map": "/SNAPTURE/static/css/2.97503911.chunk.css.map",
+    "static/css/main.d5c86942.chunk.css.map": "/SNAPTURE/static/css/main.d5c86942.chunk.css.map",
+    "static/js/2.2b178037.chunk.js.LICENSE.txt": "/SNAPTURE/static/js/2.2b178037.chunk.js.LICENSE.txt",
+    "static/media/AuthHomePic.2901dbd6.jpg": "/SNAPTURE/static/media/AuthHomePic.2901dbd6.jpg",
+    "static/media/PersonImg.437d7ead.webp": "/SNAPTURE/static/media/PersonImg.437d7ead.webp",
+    "static/media/facebook.610c3ca6.gif": "/SNAPTURE/static/media/facebook.610c3ca6.gif",
+    "static/media/google.0940a115.gif": "/SNAPTURE/static/media/google.0940a115.gif",
+    "static/media/microsoft.62c5c1b8.gif": "/SNAPTURE/static/media/microsoft.62c5c1b8.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.da002678.js",
+    "static/css/2.97503911.chunk.css",
+    "static/js/2.2b178037.chunk.js",
+    "static/css/main.d5c86942.chunk.css",
+    "static/js/main.f7086a8f.chunk.js"
+  ]
+}
