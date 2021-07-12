@@ -11,7 +11,7 @@ import Header from "./components/Header";
 
 const DashLayout = () => {
   //Setting mobile responsive
-  const [mobile, setMobile] = useState(false);
+  const [mobile, setMobile] = useState(window.innerWidth < 1080);
   useEffect(() => {
     const handleSize = () => setMobile(window.innerWidth < 1080);
     window.addEventListener("resize", handleSize);
