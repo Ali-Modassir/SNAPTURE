@@ -1,5 +1,5 @@
 {
-  "homepage": "https://ali-modassir.github.io/SNAPTURE",
+  "homepage": "https://ali-modassir.github.io/snapture",
   "name": "snapture-frontend",
   "version": "0.1.0",
   "private": true,
@@ -28,7 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "deploy" : "gh-pages -b frontend -d build"
   },
   "eslintConfig": {
     "extends": [
