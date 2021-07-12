@@ -4,13 +4,15 @@
   justify-content: flex-start;
   padding: 0.5rem;
   width: 80%;
+  padding-left: 0;
 }
 
 .newsCard {
   border: 0px solid aqua;
   margin: 0.5rem;
+  margin-left: 0;
   position: relative;
-  height: 750px;
+  height: 100%;
   width: 100%;
   overflow: hidden;
   border-radius: 0.5rem;
@@ -22,7 +24,7 @@
 
 @media (min-width: 900px) {
   .newsCard {
-    height: 20rem;
+    height: 30rem;
   }
 }
 
@@ -84,7 +86,7 @@
   transition: max-height 1.5s ease, opacity 1s ease;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 300px) {
   .newsCard:hover .newsCard__detailsWrapper {
     max-height: 20rem;
     opacity: 1;
@@ -109,7 +111,9 @@
 .newsCard__readMore {
   background: black;
   color: #bbb;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   padding: 0.4rem 0.6rem;
   border-radius: 0.3rem;
   margin-top: 1rem;
@@ -138,7 +142,7 @@
   color: yellow;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .contentWrapper {
     width: 98%;
     justify-content: center;

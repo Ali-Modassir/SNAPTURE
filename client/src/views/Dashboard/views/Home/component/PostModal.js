@@ -1,13 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import style from "../../../style/PostModal.module.css";
 import AddIcon from "@material-ui/icons/Add";
-import { Avatar, Fade } from "@material-ui/core";
+import { Avatar, CircularProgress } from "@material-ui/core";
+import { AuthContext } from "../../../../../context/authContext";
+import { useHttpClient } from "../../../../../customHooks/httpHook";
+import { toast } from "react-toastify";
 
-const PostModal = () => {
+const PostModal = ({ mobile }) => {
+  const auth = useContext(AuthContext);
+  const { sendRequest, isLoading } = useHttpClient();
+
   const postSubmitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    console.log(formData);
+    formData.append("userId", auth.userId);
+    formData.append("userName", auth.userName);
+    formData.append("userEmail", auth.userEmail);
+    setTimeout(() => {
+      sendRequest(
+        process.env.REACT_APP_BASE_URL + "/post/createPost",
+        "POST",
+        formData
+      )
+        .then((res) => {
+          if (res.ok) toast.success(res.message, { position: "top-right" });
+          else toast.warning(res.message, { position: "top-right" });
+          console.log(res);
+        })
+        .catch((err) => {
+          toast.error("Something went wrong,Please try again", {
+            position: "top-right",
+          });
+          console.log(err);
+        });
+    }, 500);
   };
 
   const [previewSrc, setPreviewSrc] = useState("");
@@ -24,7 +50,7 @@ const PostModal = () => {
   if (file) fileReader.readAsDataURL(file);
 
   return (
-    <div className={style.container}>
+    <div className={style.container} style={{ margin: mobile && "10px" }}>
       <form onSubmit={postSubmitHandler}>
         <div className={style.caption}>
           <div className={style.captionLabel}>ADD A CAPTION</div>
@@ -38,7 +64,7 @@ const PostModal = () => {
         <div className={style.image}>
           <input
             type="file"
-            name="profilePic"
+            name="file"
             accept=".png,.jpeg,.jpg"
             id="profilePicBtn"
             className={style.image_file}
@@ -66,9 +92,13 @@ const PostModal = () => {
             />
           </label>
         </div>
-        <button type="submit" className={style.addPostBtn}>
-          ADD POST
-        </button>
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <button type="submit" className={style.addPostBtn}>
+            ADD POST
+          </button>
+        )}
       </form>
     </div>
   );

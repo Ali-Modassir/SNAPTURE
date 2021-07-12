@@ -4,7 +4,6 @@ import style from "./style/DashLayout.module.css";
 import DashboardRoutes from "../../routes";
 import { Drawer } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import RightSidebar from "./components/RightSidebar";
 import { Route } from "react-router-dom";
 import Home from "./views/Home/Home";
@@ -32,26 +31,31 @@ const DashLayout = () => {
   };
 
   return (
-    <div className={style.container}>
-      {!mobile ? (
-        <LeftSidebar routes={DashboardRoutes} />
-      ) : (
-        <>
-          <button onClick={toggleDrawer(true)}>
-            <MenuIcon />
-          </button>
-          <Drawer open={drawerOpen} onClose={toggleDrawer(false)}>
-            <CancelRoundedIcon onClick={toggleDrawer(false)} />
-            <LeftSidebar routes={DashboardRoutes} />
-          </Drawer>
-        </>
-      )}
-      <div className={style.middle}>
-        <Header />
-        <Route path="/dash" component={Home} />
+    <>
+      <div className={style.menuBtnContainer}>
+        <MenuIcon
+          onClick={toggleDrawer(true)}
+          style={{
+            color: "white",
+          }}
+          fontSize="large"
+        />
       </div>
-      <RightSidebar />
-    </div>
+      <div className={style.container}>
+        {!mobile ? (
+          <LeftSidebar routes={DashboardRoutes} mobile={false} />
+        ) : (
+          <Drawer open={drawerOpen} onClose={toggleDrawer(false)}>
+            <LeftSidebar routes={DashboardRoutes} mobile={true} />
+          </Drawer>
+        )}
+        <div className={style.middle}>
+          <Header />
+          <Route path="/dash" component={Home} />
+        </div>
+        <RightSidebar />
+      </div>
+    </>
   );
 };
 

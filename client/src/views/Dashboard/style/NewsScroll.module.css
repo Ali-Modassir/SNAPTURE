@@ -51,7 +51,7 @@
 }
 
 .btns {
-  padding-top: 10px;
+  padding-top: 50px;
 }
 
 .btns .btn {
@@ -65,8 +65,17 @@
   margin-left: 40px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .btns {
     padding-top: 5px;
+    padding-left: -10px;
+  }
+  .btns .btn {
+    padding: 5px;
+  }
+  .slideC {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }

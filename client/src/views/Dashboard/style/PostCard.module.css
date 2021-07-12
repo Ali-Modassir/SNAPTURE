@@ -75,17 +75,30 @@
   color: rgb(94, 72, 72);
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .container {
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left: 0;
     margin-right: 0;
+    margin-left: 10px;
   }
   .image {
     width: 98%;
     border: none;
   }
+  .profileDetails {
+    width: 98%;
+    padding: 0;
+  }
+  .postCardDetails {
+    width: 96%;
+  }
+  .caption,
+  .count,
+  .profileName {
+    font-size: 1rem;
+  }
+
   .container:hover {
     transform: none;
   }

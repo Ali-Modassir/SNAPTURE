@@ -3,9 +3,12 @@ import classnames from "classnames";
 import style from "../style/LeftSidebar.module.css";
 import { NavLink } from "react-router-dom";
 
-const LeftSidebar = ({ routes }) => {
+const LeftSidebar = ({ routes, mobile }) => {
   return (
-    <div className={classnames(style.container)}>
+    <div
+      className={classnames(style.container)}
+      style={{ backgroundColor: mobile && "purple", width: "300px" }}
+    >
       <div className={classnames(style.brandlogo)}>SNAPTURE</div>
       <div className={classnames(style.routes)}>
         {routes.map((route, key) => {

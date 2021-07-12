@@ -17,7 +17,7 @@
   width: 0px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 5px) {
   .container {
     justify-content: center;
   }

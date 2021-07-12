@@ -10,28 +10,25 @@ export const useAuth = () => {
   const [userEmail, setUserEmail] = useState(null);
 
   //Local-login saving-token-to-localStorage
-  const login = useCallback(
-    (userType, uname, uemail, uid, token, expirationDate) => {
-      setToken(token);
-      setUserId(uid);
-      setUserEmail(uemail);
-      setUserName(uname);
-      const tokenExpirationDate =
-        expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
-      setTokenExpirationDate(tokenExpirationDate);
-      localStorage.setItem(
-        "userData",
-        JSON.stringify({
-          userName: uname,
-          userEmail: uemail,
-          userId: uid,
-          token: token,
-          expiration: tokenExpirationDate.toISOString(),
-        })
-      );
-    },
-    []
-  );
+  const login = useCallback((uname, uemail, uid, token, expirationDate) => {
+    setToken(token);
+    setUserId(uid);
+    setUserEmail(uemail);
+    setUserName(uname);
+    const tokenExpirationDate =
+      expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
+    setTokenExpirationDate(tokenExpirationDate);
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({
+        userName: uname,
+        userEmail: uemail,
+        userId: uid,
+        token: token,
+        expiration: tokenExpirationDate.toISOString(),
+      })
+    );
+  }, []);
 
   //Google-login
   const googleLogin = useCallback((token, expirationDate) => {
