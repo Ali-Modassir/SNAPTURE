@@ -9,6 +9,7 @@ import {
 import ForgotPassword from "./views/Authentication/views/ForgotPassword";
 import ResetPassword from "./views/Authentication/views/ResetPassword";
 import DashLayout from "./views/Dashboard/DashLayout";
+// import ProfileUpdate from './views/Dashboard/views/'
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

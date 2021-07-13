@@ -88,23 +88,19 @@ module.exports.signup_post = async (req, res, next) => {
 module.exports.confirmEmail = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const user = await User.findById(id);
-    if (!user) return res.json({ message: "User Not found", ok: false });
-    if (user.local.confirmed)
-      res.json({ message: "Email Already Confirmed, Please Login", ok: false });
-    await UserModel.User.findOneAndUpdate(
-      { _id: user._id },
-      {
-        $set: {
-          "local.confirmed": true,
-        },
-      }
-    );
-    const token = createToken(confirmedUser._id);
+    const user = await User.findByIdAndUpdate(id, {
+      $set: {
+        "local.confirmed": true,
+      },
+    });
+    if (user.local.confirmed) {
+      return res.json({ message: "User already confirmed", ok: false });
+    }
+    const token = createToken(user._id);
     return res.json({
-      userId: confirmedUser._id,
-      userName: confirmedUser.local.name,
-      userEmail: confirmedUser.local.email,
+      userId: user._id,
+      userName: user.local.name,
+      userEmail: user.local.email,
       token: token,
       ok: true,
       message: "Email Confirmed, Account Successfully Created",
@@ -121,7 +117,7 @@ module.exports.login_post = async (req, res, next) => {
     const { email, password } = req.body;
     const user = await User.login(email, password);
     if (user === "Incorrect Password!!!" || user === "Incorrect Email!!!") {
-      return res.json({ ok: false, message: user });
+      return res.json({ ok: false, message: "Credentials seems to be wrong" });
     }
     if (!user.local.confirmed) {
       return res.status(403).json({

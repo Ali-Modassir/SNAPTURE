@@ -11,7 +11,7 @@ const NewsCard = ({ props }) => {
       <div className={style.newsCard}>
         <a href="#" className={style.newsCard__cardLink}></a>
         <img
-          src={multimedia[0].url}
+          src={multimedia && multimedia[0].url}
           alt={title}
           className={style.newsCard__image}
         />

@@ -6,12 +6,12 @@ import HelpIcon from "@material-ui/icons/Help";
 
 const DashboardRoutes = [
   {
-    path: "/dash",
+    path: "/dash/dashboard",
     name: "Home",
     icon: <HomeIcon />,
   },
   {
-    path: "/profile",
+    path: "/dash/profile",
     name: "My Profile",
     icon: <AccountCircleIcon />,
   },

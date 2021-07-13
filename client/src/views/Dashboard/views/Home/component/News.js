@@ -8,7 +8,7 @@ const News = () => {
   const { sendRequest } = useHttpClient();
   const [data, setData] = useState([]);
   useEffect(() => {
-    sendRequest(process.env.REACT_APP_BASE_URL + "/news/home")
+    sendRequest(process.env.REACT_APP_BASE_URL + "/news/upshot")
       .then((res) => {
         if (res.ok) {
           setData(res.articles);

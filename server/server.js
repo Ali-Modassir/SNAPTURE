@@ -5,6 +5,8 @@ const passport = require("passport");
 
 const authRoutes = require("./routes/authRoutes");
 const oAuthRoutes = require("./routes/oAuthRoutes");
+const postRoutes = require("./routes/postRoutes");
+const newsRoutes = require("./routes/newsRoutes");
 
 const app = express();
 
@@ -28,6 +30,8 @@ app.use((req, res, next) => {
 
 //Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/post", postRoutes);
+app.use("/api/news", newsRoutes);
 app.use("/", oAuthRoutes);
 
 // For any unknown API request
