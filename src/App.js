@@ -9,6 +9,7 @@ import {
 import ForgotPassword from "./views/Authentication/views/ForgotPassword";
 import ResetPassword from "./views/Authentication/views/ResetPassword";
 import DashLayout from "./views/Dashboard/DashLayout";
+// import ProfileUpdate from './views/Dashboard/views/'
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,13 +17,24 @@ import ConfirmEmail from "./views/Authentication/views/ConfirmEmail";
 import OAuth from "./views/Authentication/views/OAuth";
 //Contexts-------------------------------------------
 import { AuthContext } from "./context/authContext";
+import { NewsContext } from "./context/newsContext";
 //hooks----------------------------------------------
 import { useAuth } from "./customHooks/authHook";
+import { useNewsHook } from "./customHooks/newsHook";
 
 const App = () => {
   //Context
-  const { token, login, logout, userId, userName, userEmail, googleLogin } =
-    useAuth();
+  const {
+    token,
+    login,
+    logout,
+    userId,
+    userName,
+    userEmail,
+    googleLogin,
+    institute,
+  } = useAuth();
+  const { newsData } = useNewsHook();
   let route = null;
   if (token)
     route = (
@@ -53,12 +65,19 @@ const App = () => {
           userName: userName,
           userEmail: userEmail,
           userId: userId,
+          institute: institute,
           logout: logout,
           login: login,
           googleLogin: googleLogin,
         }}
       >
-        <Router>{route}</Router>
+        <NewsContext.Provider
+          value={{
+            newsData,
+          }}
+        >
+          <Router>{route}</Router>
+        </NewsContext.Provider>
       </AuthContext.Provider>
     </>
   );

@@ -1,19 +1,7 @@
-.container {
-  width: 20%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  position: fixed;
-  right: 0;
-  min-width: 350px;
-}
-
 .profileCard {
-  margin-top: 80px;
   height: 45vh;
-  width: 90%;
+  width: 40%;
+  min-width: 300px;
   border-radius: 20px;
   box-shadow: -2px 6px 16px 1px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: -2px 6px 16px 1px rgba(0, 0, 0, 0.75);
@@ -23,17 +11,21 @@
   justify-content: space-evenly;
   align-items: center;
   transition: transform 0.5s;
-}
-.profileCard:hover {
-  background-position: right center;
-  transform: rotate(2deg);
-}
-
-.profileImg img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 2px solid whitesmoke;
+  background-image: linear-gradient(
+    to left bottom,
+    #170736,
+    #180834,
+    #180833,
+    #190931,
+    #190a30,
+    #1f0c32,
+    #260d34,
+    #2d0e36,
+    #3d0e3a,
+    #4c0d3c,
+    #5c0c3c,
+    #6b0b3b
+  );
 }
 
 .name {
@@ -46,7 +38,7 @@
   margin-top: -20px;
 }
 
-.updateProfileBtn {
+.followBtn {
   background-image: linear-gradient(
     to right,
     #c21500 0%,
@@ -63,11 +55,10 @@
   box-shadow: 0 0 20px #190931;
   border-radius: 10px;
   display: block;
-  cursor: pointer;
   border: none;
 }
 
-.updateProfileBtn:hover {
+.followBtn:hover {
   background-position: right center; /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
@@ -76,7 +67,7 @@
 .profileStats {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 70%;
   text-align: center;
 }
 
@@ -89,47 +80,19 @@
 .number {
   font-family: "Montserrat";
   margin-bottom: 10px;
-  font-size: 1.5rem;
-  color: white;
-}
-.stateName {
-  font-size: 0.9rem;
-}
-
-.createPost {
-  margin-top: 50px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.createPostBtn {
-  background-image: linear-gradient(
-    to right,
-    #c21500 0%,
-    #ffc500 51%,
-    #c21500 100%
-  );
-  width: 250px;
-  height: 250px;
-  border: none;
-  border-radius: 50%;
-  padding: 10px;
-  transition: 0.5s;
-  transition: transform 0.5s;
-  background-size: 200% auto;
-  font-size: 1.5rem;
-  color: white;
-  font-family: "Monstrett";
-  cursor: pointer;
-}
-.createPostBtn:hover {
-  background-position: right center;
-  transform: scale3d(1.1, 1, 1);
+  font-size: 1rem;
+  color: grey;
 }
 
 @media (max-width: 500px) {
-  .container {
-    display: none;
+  .profileCard {
+    height: 55vh;
+    margin-bottom: 50px;
+  }
+  .name {
+    font-size: 1.2rem;
+  }
+  .branch {
+    font-size: 1rem;
   }
 }

@@ -2,11 +2,11 @@
   max-width: 100%;
   margin: 30px;
   margin-left: 0;
-  transition: transform 0.5s;
+  transition: transform 0.9s;
   max-width: 1000px;
 }
 .container:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .profileDetails {
@@ -49,6 +49,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  font-family: "Ubuntu" sans-serif;
 }
 
 .caption {
@@ -70,9 +71,11 @@
 
 .count {
   font-family: "Monstrett";
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-left: 10px;
   color: rgb(94, 72, 72);
+  font-family: "Ubuntu" sans-serif;
+  margin-right: 10px;
 }
 
 @media (max-width: 500px) {

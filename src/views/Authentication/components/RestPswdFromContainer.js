@@ -62,7 +62,7 @@ const RestPswdFromContainer = () => {
           />
         </div>
         {isLoading ? (
-          <CircularProgress />
+          <CircularProgress style={{ color: "orangered" }} />
         ) : (
           <button type="submit" className={classes.auth_btn}>
             &gt;&gt;

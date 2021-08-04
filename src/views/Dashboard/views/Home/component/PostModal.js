@@ -39,9 +39,7 @@ const PostModal = ({ mobile }) => {
   const [previewSrc, setPreviewSrc] = useState("");
   const [file, setFile] = useState(null);
 
-  const fileChangeHandler = (e) => {
-    setFile(e.target.files[0]);
-  };
+  const fileChangeHandler = (e) => setFile(e.target.files[0]);
 
   const fileReader = new FileReader();
   fileReader.onload = () => {

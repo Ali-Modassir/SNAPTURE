@@ -1,5 +1,5 @@
 {
-  "name": "snapture-frontend",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,7 +11,8 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "classnames": "^2.3.1",
-    "gh-pages": "^3.2.3",
+    "firebase": "^8.8.1",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.3.4",

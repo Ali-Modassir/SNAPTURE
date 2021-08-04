@@ -5,11 +5,9 @@ import classes from "../styles/Authentication.module.css";
 import SignUpFormContainer from "../components/SignUpFormContainer";
 import LoginFormContainer from "../components/LoginFormContainer";
 
-import AuthHomePic from "../../../assets/img/AuthHomePic.jpg";
 import Brandlogo from "../../../assets/img/BrandLogo.png";
 
 import GoogleIcon from "../../../assets/icons/google.gif";
-import FacebookIcon from "../../../assets/icons/facebook.gif";
 import MicrosoftIcon from "../../../assets/icons/microsoft.gif";
 
 const Authentication = () => {
@@ -19,7 +17,16 @@ const Authentication = () => {
     <div className={classes.auth_container}>
       <div className={classes.auth_card}>
         <div className={classes.card_left}>
-          <img src={AuthHomePic} alt="AuthBrandPic" />
+          <div className={classes.card_left_heading}>WELCOME TO</div>
+          <img
+            src={Brandlogo}
+            alt="brandLogo"
+            className={classes.brandlogo_left}
+          />
+          <div className={classes.ownerDesciption}>
+            Designed and Developed By
+            <span className={classes.changeColor2}>Modassir</span>
+          </div>
         </div>
         <div className={classes.card_right}>
           <img src={Brandlogo} alt="brandLogo" className={classes.brandlogo} />

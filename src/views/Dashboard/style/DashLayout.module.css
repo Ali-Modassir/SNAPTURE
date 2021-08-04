@@ -1,7 +1,8 @@
 .container {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 100vw;
+  min-height: 100vh;
   margin: auto auto;
   background-image: linear-gradient(
     to left bottom,
@@ -18,7 +19,6 @@
     #5c0c3c,
     #6b0b3b
   );
-  overflow-x: hidden;
 }
 
 .middle {

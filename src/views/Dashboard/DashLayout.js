@@ -5,13 +5,17 @@ import DashboardRoutes from "../../routes";
 import { Drawer } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import RightSidebar from "./components/RightSidebar";
-import { Route } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Home from "./views/Home/Home";
 import Header from "./components/Header";
+import ProfileUpdate from "./views/ProfileUpdate/ProfileUpdate";
+import Message from "./views/Messages/Message";
+import FindFriends from "./views/FindFriends/FindFriends";
+import FeedBack from "./views/FeedBack/FeedBack";
 
 const DashLayout = () => {
   //Setting mobile responsive
-  const [mobile, setMobile] = useState(window.innerWidth < 1080);
+  const [mobile, setMobile] = useState(false);
   useEffect(() => {
     const handleSize = () => setMobile(window.innerWidth < 1080);
     window.addEventListener("resize", handleSize);
@@ -51,7 +55,14 @@ const DashLayout = () => {
         )}
         <div className={style.middle}>
           <Header />
-          <Route path="/dash" component={Home} />
+          <Switch>
+            <Route path="/dash/dashboard" component={Home} />
+            <Route path="/dash/profile" component={ProfileUpdate} />
+            <Route path="/dash/messages" component={Message} />
+            <Route path="/dash/findFriends" component={FindFriends} />
+            <Route path="/dash/feedback" component={FeedBack} />
+            <Redirect to="/dash/dashboard" />
+          </Switch>
         </div>
         <RightSidebar />
       </div>

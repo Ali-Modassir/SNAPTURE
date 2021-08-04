@@ -12,6 +12,12 @@
   margin: 20px;
 }
 
+.error {
+  color: white;
+  font-size: 2rem;
+  margin-left: 30px;
+}
+
 .createPostBtn {
   background-image: linear-gradient(
     to right,
