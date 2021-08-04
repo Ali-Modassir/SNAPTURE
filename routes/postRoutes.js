@@ -10,4 +10,5 @@ const router = Router();
 router.post("/createPost", multer.single("file"), postController.create_post);
 router.get("/getPosts", postController.getPost);
 router.post("/like", postController.updateLike);
+router.get("/getPostsById/:userId", postController.getPostsById);
 module.exports = router;

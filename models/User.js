@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
   method: {
     type: String,
-    enum: ["local", "google", "facebook"],
+    enum: ["local", "google", "microsoft"],
     required: true,
   },
 
@@ -21,6 +21,19 @@ const userSchema = new mongoose.Schema({
       type: Boolean,
       default: false,
     },
+    profilePic: String,
+    institute: String,
+    division: String,
+    followers: Array,
+    following: Array,
+    friend: [
+      { 
+        conversationId:String,
+        friendId: String,
+        friendName: String,
+        friendProfilePic: String,
+      },
+    ],
     secretToken: String,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
@@ -54,15 +67,6 @@ const userSchema = new mongoose.Schema({
       default: "",
     },
   },
-});
-
-//incrypting password
-userSchema.pre("save", async function (next) {
-  if (this.method != "local") next();
-  const salt = await bcrypt.genSalt(10);
-  const password = this.local.password;
-  this.local.password = await bcrypt.hash(password, salt);
-  next();
 });
 
 // static method to login user

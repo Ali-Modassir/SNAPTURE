@@ -4,9 +4,11 @@ const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 
 const User = require("../models/User"); //Model
+const Feedback = require("../models/Feedback");
 const HttpError = require("../misc/HttpError"); //Helper function for Handle error
 const sendEmail = require("../config/nodemailer"); //nodemailer
 const emailTemplates = require("../config/emailTemplates"); //nodemailer-email-templates
+const { v4: uuidv4 } = require("uuid");
 
 // handle errors
 const handleErrors = (err) => {
@@ -48,8 +50,8 @@ const createToken = (id) => {
 //SignUp Controller
 module.exports.signup_post = async (req, res, next) => {
   try {
-    const { name, email, password, confirmPassword } = req.body;
-    if (!name || !email || !password || !confirmPassword)
+    const { name, email, institute, password, confirmPassword } = req.body;
+    if (!name || !email || !password || !confirmPassword || !institute)
       return res.json({ message: "Please Enter all details", ok: false });
     if (password != confirmPassword)
       return res.json({ message: "Passwords not matched", ok: false });
@@ -62,9 +64,11 @@ module.exports.signup_post = async (req, res, next) => {
         ok: false,
       });
 
+    //Hashsing password
+    const hashPassword = await bcrypt.hash(password, 10);
     const user = await new User({
       method: "local",
-      local: { name, email, password },
+      local: { name, email, password: hashPassword, institute },
     });
     await user.save(); //Saved-User-Data
 
@@ -79,6 +83,7 @@ module.exports.signup_post = async (req, res, next) => {
       ok: true,
     });
   } catch (err) {
+    console.log(err);
     const errors = handleErrors(err);
     return next(errors);
   }
@@ -88,23 +93,20 @@ module.exports.signup_post = async (req, res, next) => {
 module.exports.confirmEmail = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const user = await User.findById(id);
-    if (!user) return res.json({ message: "User Not found", ok: false });
-    if (user.local.confirmed)
-      res.json({ message: "Email Already Confirmed, Please Login", ok: false });
-    await UserModel.User.findOneAndUpdate(
-      { _id: user._id },
-      {
-        $set: {
-          "local.confirmed": true,
-        },
-      }
-    );
-    const token = createToken(confirmedUser._id);
+    const user = await User.findByIdAndUpdate(id, {
+      $set: {
+        "local.confirmed": true,
+      },
+    });
+    if (user.local.confirmed) {
+      return res.json({ message: "User already confirmed", ok: false });
+    }
+    const token = createToken(user._id);
     return res.json({
-      userId: confirmedUser._id,
-      userName: confirmedUser.local.name,
-      userEmail: confirmedUser.local.email,
+      userId: user._id,
+      userName: user.local.name,
+      userEmail: user.local.email,
+      institute: user.local.institute,
       token: token,
       ok: true,
       message: "Email Confirmed, Account Successfully Created",
@@ -121,7 +123,7 @@ module.exports.login_post = async (req, res, next) => {
     const { email, password } = req.body;
     const user = await User.login(email, password);
     if (user === "Incorrect Password!!!" || user === "Incorrect Email!!!") {
-      return res.json({ ok: false, message: user });
+      return res.json({ ok: false, message: "Credentials seems to be wrong" });
     }
     if (!user.local.confirmed) {
       return res.status(403).json({
@@ -134,6 +136,7 @@ module.exports.login_post = async (req, res, next) => {
         userId: user._id,
         userName: user.local.name,
         userEmail: user.local.email,
+        institute: user.local.institute,
         token,
         ok: true,
         message: "Logged In Successfully",
@@ -259,5 +262,147 @@ module.exports.getUser = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
+  }
+};
+
+module.exports.getAllUsers = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const allUsers = await User.find({ _id: { $ne: userId } });
+    const reqDetails = allUsers.map((user, index) => {
+      return {
+        index: index,
+        name: user.local.name,
+        email: user.local.email,
+        institute: user.local.institute,
+        followers: user.local.followers,
+        profilePic: user.local.profilePic,
+        userId: user._id,
+      };
+    });
+    return res.status(200).json({ users: reqDetails, ok: true });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Something went wrong", ok: false });
+  }
+};
+
+module.exports.addFollower = async (req, res) => {
+  let { query } = req.params;
+  query = query.split("=");
+  const userId = query[0];
+  const personId = query[1];
+
+  try {
+    const user = await User.findById(userId);
+    if (!user)
+      return res.status(400).json({ message: "User not found", ok: false });
+    const followingIdx = user.local.following.indexOf(personId);
+    const friendIdx = user.local.friend.findIndex(
+      (user) => user.friendId === personId
+    );
+    if (followingIdx != -1) {
+      user.local.following.splice(followingIdx, 1);
+      if (friendIdx != -1) {
+        user.local.friend.splice(friendIdx, 1);
+        const person = await User.findById(personId);
+        const userFriendIdx = person.local.friend.findIndex(
+          (user) => user.friendId === userId
+        );
+        person.local.friend.splice(userFriendIdx, 1);
+        user.save();
+        person.save();
+        return res.json({
+          message: "Unfollowed and Unfriend",
+          following: false,
+          friend: false,
+          ok: true,
+        });
+      }
+      user.save();
+      return res.json({
+        message: "Unfollowed",
+        id: true,
+        following: false,
+      });
+    }
+
+    const person = await User.findById(personId);
+    if (!person)
+      return res.status(400).json({ message: "User not found", ok: false });
+
+    user.local.following.push(personId);
+    person.local.followers.push(userId);
+    var isFriend = false;
+    if (user.local.followers.indexOf(personId) != -1) {
+      const conversationId = uuidv4();
+      user.local.friend.push({
+        conversationId,
+        friendId: personId,
+        friendName: person.local.name,
+        friendProfilePic: person.local.profilePic,
+      });
+      person.local.friend.push({
+        conversationId,
+        friendId: userId,
+        friendName: user.local.name,
+        friendProfilePic: user.local.profilePic,
+      });
+      isFriend = true;
+    }
+    user.save();
+    person.save();
+    if (isFriend) {
+      return res.json({
+        message: "Friend",
+        ok: true,
+        friend: true,
+        following: true,
+      });
+    } else {
+      return res.json({
+        message: "Followed",
+        ok: true,
+        following: true,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Something went wrong", ok: false });
+  }
+};
+
+module.exports.getAllFriends = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.findById(userId);
+    if (!user) res.status(400).json({ message: "User Not found", ok: false });
+    return res.json({ friends: user.local.friend, ok: true });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Something went wrong", ok: false });
+  }
+};
+
+module.exports.getFeedback = async (req, res) => {
+  const { name, email, description } = req.body;
+  if (!name || !email || !description)
+    return res.json({ message: "Fill all Inputs", ok: false });
+  try {
+    await new Feedback({
+      name,
+      email,
+      description,
+    });
+    await sendEmail(
+      process.env.MAIL_USER,
+      emailTemplates.feedbackTemplate(name, email, description)
+    );
+    return res.json({ message: "Feedback Submitted", ok: true });
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ message: "Unable to send Feedback", ok: false });
   }
 };

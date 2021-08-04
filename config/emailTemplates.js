@@ -1,40 +1,86 @@
 const client_origin = process.env.CLIENT_ORIGIN;
+const path = require("path");
+const fs = require("fs");
+const handlebars = require("handlebars");
+
+//Welcome-file-template
+const welcomefilePath = path.join(__dirname, "./emailTemplates/welcome.html");
+const welcomeSource = fs.readFileSync(welcomefilePath, "utf-8").toString();
+const welcomeTemp = handlebars.compile(welcomeSource);
+
+//Forgot-password-template
+const forgotFilePath = path.join(__dirname, "./emailTemplates/forgotPswd.html");
+const forgotSource = fs.readFileSync(forgotFilePath, "utf-8").toString();
+const forgotTemp = handlebars.compile(forgotSource);
 
 //Email Templates or Email subject and body
 module.exports = {
   //confirm-email-template
   confirmEmailTemp: (id, name) => ({
-    subject: `SNAPTURE: WELCOME ${name}`,
-    html: `
-            <h3>Hello, ${name}</h3>
-            <br>
-            <p>
-              <br>You are receiving this because you have successfully registered to use Snapture by Modassir Ali.
-              <br>Please <a href='${client_origin}/auth/confirm/${id}'> CLICK HERE</a> to confirm your email address
-              <br>or Copy and paste this link: ${client_origin}/auth/confirm/${id} in your browser to complete the authentication process
-            </p>
-            <br/>
-            <h5>THANK YOU</h5>
-            <h5>Modassir Ali</h5>
-          `,
+    subject: `SNAPTURE WELCOME ${name}`,
+    html: welcomeTemp({
+      name,
+      id,
+      clientOrigin: client_origin,
+    }),
+    attachments: [
+      {
+        filename: "image-1.png",
+        path: `${__dirname}/emailTemplates/images/image-1.png`,
+        cid: "image1",
+      },
+      {
+        filename: "image-2.png",
+        path: `${__dirname}/emailTemplates/images/image-2.png`,
+        cid: "image2",
+      },
+      {
+        filename: "image-3.png",
+        path: `${__dirname}/emailTemplates/images/image-3.png`,
+        cid: "image3",
+      },
+      {
+        filename: "image-4.png",
+        path: `${__dirname}/emailTemplates/images/image-4.png`,
+        cid: "image4",
+      },
+      {
+        filename: "image-5.png",
+        path: `${__dirname}/emailTemplates/images/image-5.png`,
+        cid: "image5",
+      },
+      {
+        filename: "image-6.png",
+        path: `${__dirname}/emailTemplates/images/image-6.png`,
+        cid: "image6",
+      },
+      {
+        filename: "image-7.png",
+        path: `${__dirname}/emailTemplates/images/image-7.png`,
+        cid: "image-7",
+      },
+      {
+        filename: "image-8.png",
+        path: `${__dirname}/emailTemplates/images/image-8.png`,
+        cid: "image8",
+      },
+    ],
   }),
 
   //Forgot-pswd-template
   forgotPswdTemp: (token, name) => ({
     subject: "SNAPTURE: Password Reset",
-    html: `
-          <h2>Hello, ${name}</h2>
-          <p><br>You are receiving this because you have requested the reset of the password for your account.
-             <br>Please <a href='${client_origin}/auth/reset/${token}'> CLICK HERE</a>
-             <br>Please click on the following link, or paste this into your browser to complete the process:
-             <br>${client_origin}/auth/reset/${token}
-             <br>
-             If you did not request this, please ignore this email and your password will remain unchanged
-          </p>
-          <br/>
-          <h5>THANK YOU</h5>
-          <h5>Modassir Ali</h5>
-          `,
+    html: forgotTemp({
+      clientOrigin: client_origin,
+      token,
+    }),
+    attachments: [
+      {
+        filename: "image-4.png",
+        path: `${__dirname}/emailTemplates/images/image-4.png`,
+        cid: "image4",
+      },
+    ],
   }),
 
   //pswd-change-template
@@ -44,5 +90,17 @@ module.exports = {
       `Hello, ${name} \n\n` +
       `This is a confirmation that the password for your account ${email} \n` +
       " has just been changed.\n",
+  }),
+
+  //Email Feedback template
+  feedbackTemplate: (name, email, description) => ({
+    subject: "SNAPTURE FEEDBACK",
+    html: `
+      <h2>Feedback submitted by user ${name}</h2>
+      <h2>Details</h2>
+      <p>Name: ${name}</p>
+      <p>Email: ${email}</p>
+      <p>Description: ${description}</p>
+    `,
   }),
 };

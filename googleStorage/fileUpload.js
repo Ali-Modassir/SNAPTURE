@@ -1,7 +1,8 @@
 const { format } = require("util");
 const gc = require("./googleStorage");
 const bucket = gc.bucket("snapture-modassir");
-const { v1: uuid } = require("uuid");
+const stream = require("stream");
+
 /**
  *
  * @param { File } object file object that will be uploaded
@@ -13,14 +14,18 @@ const { v1: uuid } = require("uuid");
 
 module.exports = (file) =>
   new Promise((resolve, reject) => {
-    const { originalname, buffer, mimetype } = file;
-    const blob = bucket.file(uuid() + originalname.replace(/ /g, "_"));
-    const blobStream = blob.createWriteStream({
-      resumable: false,
-      contentType: mimetype,
-      public: true,
-    });
-    blobStream
+    const bufferStream = new stream.PassThrough();
+    const { originalname, buffer, mimetype, size } = file;
+    const blob = bucket.file(originalname.replace(/ /g, "_"));
+    bufferStream
+      .pipe(
+        blob.createWriteStream({
+          resumable: false,
+          contentType: mimetype,
+          predefinedAcl: "publicRead",
+          metadata: { bytes: size },
+        })
+      )
       .on("finish", () => {
         const publicUrl = format(
           `https://storage.googleapis.com/${bucket.name}/${blob.name}`
