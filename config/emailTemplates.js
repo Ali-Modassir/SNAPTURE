@@ -35,8 +35,8 @@ module.exports = {
         cid: "image2",
       },
       {
-        filename: "image-3.png",
-        path: `${__dirname}/emailTemplates/images/image-3.png`,
+        filename: "image-3.jpeg",
+        path: `${__dirname}/emailTemplates/images/image-3.jpeg`,
         cid: "image3",
       },
       {
@@ -57,7 +57,7 @@ module.exports = {
       {
         filename: "image-7.png",
         path: `${__dirname}/emailTemplates/images/image-7.png`,
-        cid: "image-7",
+        cid: "image7",
       },
       {
         filename: "image-8.png",
