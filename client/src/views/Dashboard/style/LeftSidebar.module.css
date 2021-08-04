@@ -10,9 +10,14 @@
 }
 
 .brandlogo {
-  color: orangered;
-  font-size: 1.75rem;
-  margin-top: 25px;
+  margin-top: 50px;
+  width: 250px;
+}
+.brandLogoImg {
+  width: 100%;
+  object-fit: contain;
+  filter: invert(24%) sepia(64%) saturate(2430%) hue-rotate(358deg)
+    brightness(97%) contrast(111%);
 }
 
 .routes {

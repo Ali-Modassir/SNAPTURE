@@ -2,4 +2,11 @@
   width: 100%;
   display: flex;
   justify-content: start;
+  flex-direction: column;
+}
+
+.heading {
+  font-size: 2rem;
+  color: white;
+  margin: 30px;
 }

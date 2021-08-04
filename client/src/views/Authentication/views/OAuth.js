@@ -21,6 +21,7 @@ const OAuth = () => {
               response.userName,
               response.userEmail,
               response.userId,
+              response.institute,
               response.token
             );
           } else {

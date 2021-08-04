@@ -3,6 +3,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ChatIcon from "@material-ui/icons/Chat";
 import LocalGroceryStoreIcon from "@material-ui/icons/LocalGroceryStore";
 import HelpIcon from "@material-ui/icons/Help";
+import FaceIcon from "@material-ui/icons/Face";
 
 const DashboardRoutes = [
   {
@@ -16,18 +17,18 @@ const DashboardRoutes = [
     icon: <AccountCircleIcon />,
   },
   {
-    path: "/messages",
+    path: "/dash/messages",
     name: "Messages",
     icon: <ChatIcon />,
   },
   {
-    path: "/market",
-    name: "Market",
-    icon: <LocalGroceryStoreIcon />,
+    path: "/dash/findFriends",
+    name: "Find Friends",
+    icon: <FaceIcon />,
   },
   {
-    path: "/support",
-    name: "Help Center",
+    path: "/dash/feedback",
+    name: "Feedback",
     icon: <HelpIcon />,
   },
 ];

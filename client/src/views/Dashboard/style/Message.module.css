@@ -1,0 +1,147 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 80vh;
+  background: transparent;
+  margin-top: 10px;
+}
+.peopleContainer {
+  padding-top: 20px;
+  width: 28%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.people {
+  display: flex;
+  width: 90%;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 10px 0 10px 10px;
+  border-radius: 10px;
+}
+
+.name {
+  font-size: 1.25rem;
+  color: white;
+  margin-left: 20px;
+}
+
+.chatContainer {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.message {
+  height: 70%;
+  overflow-y: scroll;
+}
+
+.inputContainer {
+  width: 98%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2%;
+}
+
+.inputMessage {
+  width: 90%;
+  padding: 2%;
+  font-size: 1.2rem;
+  border: none;
+  padding-left: 3%;
+  background: transparent;
+  border: 0.5px;
+  border-bottom: 2px solid;
+  border-color: linear-gradient(
+    to right,
+    #c21500 0%,
+    #ffc500 51%,
+    #c21500 100%
+  );
+  color: grey;
+}
+
+.messageBtn {
+  background-image: linear-gradient(
+    to right,
+    #c21500 0%,
+    #ffc500 51%,
+    #c21500 100%
+  );
+  transition: 0.5s;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  border: none;
+  color: white;
+  margin: 2%;
+  background-color: rgb(255 255 255);
+  cursor: pointer;
+}
+.messageBtn:hover {
+  background-position: right center;
+  transform: scaleX(1.1);
+}
+
+.senderContainer {
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(247, 87, 0, 1) 0%,
+    rgba(249, 0, 0, 1) 90.1%
+  );
+  width: 50%;
+  word-wrap: break-word;
+  margin: 2%;
+  border-radius: 20px;
+  padding: 2%;
+  margin-left: auto;
+  color: white;
+}
+
+.receiverContainer {
+  background-image: linear-gradient(
+    73.1deg,
+    rgba(34, 126, 34, 1) 8%,
+    rgba(99, 162, 17, 1) 86.9%
+  );
+  width: 50%;
+  word-wrap: break-word;
+  margin: 2%;
+  border-radius: 20px;
+  padding: 2%;
+  color: white;
+}
+
+.heading {
+  font-size: 2rem;
+  margin: auto auto;
+  color: white;
+}
+
+@media (max-width: 500px) {
+  .container {
+    flex-direction: column;
+  }
+  .peopleContainer {
+    width: 100%;
+    margin-bottom: 30px;
+    overflow-y: unset;
+  }
+  .chatContainer {
+    width: 100%;
+  }
+  .message {
+    width: 100%;
+  }
+}

@@ -99,7 +99,7 @@ const ProfileForm = () => {
         />
       </div>
       {isLoading ? (
-        <CircularProgress />
+        <CircularProgress style={{ color: "orangered" }} />
       ) : (
         <button type="submit" className={style.profile_btn}>
           &gt;&gt;

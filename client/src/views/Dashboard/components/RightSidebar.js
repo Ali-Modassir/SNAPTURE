@@ -1,8 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import style from "../style/RightSidebar.module.css";
-import PersonImg from "../../../assets/img/PersonImg.webp";
-import { Modal, Grow } from "@material-ui/core";
+import { Modal, Grow, Avatar } from "@material-ui/core";
 import PostModal from "../views/Home/component/PostModal";
 import { AuthContext } from "../../../context/authContext";
 import { useHttpClient } from "../../../customHooks/httpHook";
@@ -17,6 +16,7 @@ const RightSidebar = () => {
     )
       .then((res) => {
         if (res.ok) {
+          console.log(res);
           setProfile(res._doc.local);
         }
       })
@@ -39,7 +39,14 @@ const RightSidebar = () => {
         </div>
         <div className={style.profileCard}>
           <div className={style.profileImg}>
-            <img src={profile.profilePic || PersonImg} alt="profilePic" />
+            <Avatar
+              src={profile.profilePic || "/broken-image.jpg"}
+              style={{
+                height: "150px",
+                width: "150px",
+                backgroundColor: "#1e0c32",
+              }}
+            />
           </div>
           <div className={style.name}>{profile.name || auth.userName}</div>
           <div className={style.branch}>
@@ -56,12 +63,16 @@ const RightSidebar = () => {
 
           <div className={style.profileStats}>
             <div className={style.stat}>
-              <div className={style.number}>0</div>
-              <div className={style.stateName}>POSTS</div>
+              <div className={style.number}>
+                {profile.following ? profile.following.length : "0"}
+              </div>
+              <div className={style.stateName}>FOLLOWING</div>
             </div>
             <div className={style.stat}>
-              <div className={style.number}>0</div>
-              <div className={style.stateName}>Followers</div>
+              <div className={style.number}>
+                {profile.followers ? profile.followers.length : "0"}
+              </div>
+              <div className={style.stateName}>FOLLOWERS</div>
             </div>
           </div>
         </div>

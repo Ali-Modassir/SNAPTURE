@@ -9,6 +9,10 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Home from "./views/Home/Home";
 import Header from "./components/Header";
 import ProfileUpdate from "./views/ProfileUpdate/ProfileUpdate";
+import Message from "./views/Messages/Message";
+import FindFriends from "./views/FindFriends/FindFriends";
+import FeedBack from "./views/FeedBack/FeedBack";
+
 const DashLayout = () => {
   //Setting mobile responsive
   const [mobile, setMobile] = useState(false);
@@ -54,6 +58,9 @@ const DashLayout = () => {
           <Switch>
             <Route path="/dash/dashboard" component={Home} />
             <Route path="/dash/profile" component={ProfileUpdate} />
+            <Route path="/dash/messages" component={Message} />
+            <Route path="/dash/findFriends" component={FindFriends} />
+            <Route path="/dash/feedback" component={FeedBack} />
             <Redirect to="/dash/dashboard" />
           </Switch>
         </div>

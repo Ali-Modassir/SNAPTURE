@@ -8,27 +8,33 @@ export const useAuth = () => {
   const [userId, setUserId] = useState(false);
   const [userName, setUserName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
+  const [institute, setInstitute] = useState(null);
 
   //Local-login saving-token-to-localStorage
-  const login = useCallback((uname, uemail, uid, token, expirationDate) => {
-    setToken(token);
-    setUserId(uid);
-    setUserEmail(uemail);
-    setUserName(uname);
-    const tokenExpirationDate =
-      expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
-    setTokenExpirationDate(tokenExpirationDate);
-    localStorage.setItem(
-      "userData",
-      JSON.stringify({
-        userName: uname,
-        userEmail: uemail,
-        userId: uid,
-        token: token,
-        expiration: tokenExpirationDate.toISOString(),
-      })
-    );
-  }, []);
+  const login = useCallback(
+    (uname, uemail, uid, uinstitute, token, expirationDate) => {
+      setToken(token);
+      setUserId(uid);
+      setUserEmail(uemail);
+      setUserName(uname);
+      setInstitute(uinstitute);
+      const tokenExpirationDate =
+        expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
+      setTokenExpirationDate(tokenExpirationDate);
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          userName: uname,
+          userEmail: uemail,
+          userId: uid,
+          institute: uinstitute,
+          token: token,
+          expiration: tokenExpirationDate.toISOString(),
+        })
+      );
+    },
+    []
+  );
 
   //Google-login
   const googleLogin = useCallback((token, expirationDate) => {
@@ -77,6 +83,7 @@ export const useAuth = () => {
         storedData.userName,
         storedData.userEmail,
         storedData.userId,
+        storedData.institute,
         storedData.token,
         new Date(storedData.expiration)
       );
@@ -90,6 +97,7 @@ export const useAuth = () => {
     userId,
     userName,
     userEmail,
+    institute,
     googleLogin,
   };
 };

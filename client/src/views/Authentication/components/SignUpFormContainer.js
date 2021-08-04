@@ -59,6 +59,12 @@ const FormContainer = () => {
             placeholder="Email"
             className={classes.auth_input}
           />
+          <input
+            type="text"
+            name="institute"
+            placeholder="College/Institute"
+            className={classes.auth_input}
+          />
         </div>
         <div className={classes.form_row}>
           <input
@@ -75,7 +81,7 @@ const FormContainer = () => {
           />
         </div>
         {isLoading ? (
-          <CircularProgress />
+          <CircularProgress style={{ color: "orangered" }} />
         ) : (
           <button type="submit" className={classes.auth_btn}>
             &gt;&gt;

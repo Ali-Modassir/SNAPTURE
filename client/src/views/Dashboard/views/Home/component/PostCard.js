@@ -1,19 +1,27 @@
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import style from "../../../style/PostCard.module.css";
 import { Avatar } from "@material-ui/core";
 import { useHttpClient } from "../../../../../customHooks/httpHook";
+import { AuthContext } from "../../../../../context/authContext";
+import moment from "moment";
 
 const PostCard = ({ props }) => {
-  const { userName, imageUrl, caption, like, postId, userId } = props;
+  const { userName, imageUrl, caption, like, postId, userId, uploadDate } =
+    props;
+  const auth = useContext(AuthContext);
+  const userLikedId = auth.userId;
   var set = new Set(like);
   const [likeIds] = useState(set);
   const { sendRequest } = useHttpClient();
-  const [liked, setLiked] = useState(likeIds.has(userId));
+  const [liked, setLiked] = useState(likeIds.has(userLikedId));
+
+  const date = moment(uploadDate).fromNow();
 
   const likeCounterHandler = () => {
     const data = {
       userId,
+      userLikedId,
       postId,
       type: liked,
     };
@@ -27,13 +35,12 @@ const PostCard = ({ props }) => {
         }
       )
         .then((res) => {
-          console.log(res);
           if (res.ok) {
             if (liked) {
-              likeIds.delete(userId);
+              likeIds.delete(userLikedId);
               setLiked(false);
             } else if (!liked) {
-              likeIds.add(userId);
+              likeIds.add(userLikedId);
               setLiked(true);
             }
           }
@@ -63,6 +70,7 @@ const PostCard = ({ props }) => {
             onClick={likeCounterHandler}
           />
           <div className={style.count}>{likeIds.size}</div>
+          <div className={style.time}>{date}</div>
         </div>
       </div>
     </div>

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import style from "../../../style/Posts.module.css";
 import PostCard from "./PostCard";
-import { Modal, Grow } from "@material-ui/core";
+import { Modal, Grow, CircularProgress } from "@material-ui/core";
 import { useHttpClient } from "../../../../../customHooks/httpHook";
-import { toast } from "react-toastify";
 import PostModal from "../component/PostModal";
 
 const Posts = () => {
@@ -22,11 +21,10 @@ const Posts = () => {
             setData(res.posts);
           } else {
             setError(res.message);
-            toast.warning(res.message, { position: "top-right" });
           }
         })
         .catch((err) => {
-          console.log(error);
+          console.log(err);
         });
     }, 500);
   }, []);
@@ -55,7 +53,8 @@ const Posts = () => {
         </Modal>
       </div>
       <div className={style.container}>
-        {posts || <div style={{ color: "white" }}>{error}</div>}
+        {isLoading && <CircularProgress style={{ color: "orangered" }} />}
+        {posts || <div className={style.error}>{error}</div>}
       </div>
     </>
   );

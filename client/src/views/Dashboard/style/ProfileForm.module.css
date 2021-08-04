@@ -56,3 +56,19 @@
 ::-webkit-input-placeholder {
   color: white;
 }
+
+@media (max-width: 500px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .form_row {
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+  }
+  .image_btn {
+    left: 65px;
+  }
+}

@@ -26,7 +26,13 @@ const ConfirmEmail = () => {
         if (res.ok) {
           setSuccessMessage(res.message);
           toast.success(res.message, { position: "top-right" });
-          auth.login(res.userName, res.userEmail, res.userId, res.token);
+          auth.login(
+            res.userName,
+            res.userEmail,
+            res.userId,
+            res.institute,
+            res.token
+          );
         } else {
           setErrorMessage(res.message);
           toast.warn(res.message, { position: "top-right" });

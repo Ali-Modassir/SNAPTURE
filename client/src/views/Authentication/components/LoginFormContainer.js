@@ -31,7 +31,13 @@ const LoginFormContainer = () => {
           if (res.ok) {
             toast.success("Logged In", { position: "top-right" });
             console.log(res);
-            auth.login(res.userName, res.userEmail, res.userId, res.token);
+            auth.login(
+              res.userName,
+              res.userEmail,
+              res.userId,
+              res.institute,
+              res.token
+            );
           } else {
             toast.warn(res.message, { position: "top-right" });
           }
@@ -65,7 +71,7 @@ const LoginFormContainer = () => {
           />
         </div>
         {isLoading ? (
-          <CircularProgress />
+          <CircularProgress style={{ color: "orangered" }} />
         ) : (
           <button type="submit" className={classes.auth_btn}>
             &gt;&gt;
