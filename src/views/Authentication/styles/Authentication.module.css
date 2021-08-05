@@ -158,6 +158,11 @@
   text-align: center;
 }
 
+.forgotBrandLogo {
+  width: 200px;
+  object-fit: contain;
+}
+
 @media (max-width: 1024px) {
   .brandlogo {
     top: -45px;

@@ -15,7 +15,11 @@ const ResetPassword = () => {
           className={classes.card_right}
           style={{ justifyContent: "center", width: "100%" }}
         >
-          <img src={Brandlogo} alt="brandLogo" />
+          <img
+            src={Brandlogo}
+            alt="brandLogo"
+            className={classes.forgotBrandLogo}
+          />
           <div className={classes.largeFont}>Reset Password</div>
           <br />
           <RestPswdFromContainer />
