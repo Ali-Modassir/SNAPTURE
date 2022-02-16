@@ -16,6 +16,7 @@ const PostModal = ({ mobile }) => {
     formData.append("userId", auth.userId);
     formData.append("userName", auth.userName);
     formData.append("userEmail", auth.userEmail);
+    formData.append("location", auth.institute);
     setTimeout(() => {
       sendRequest(
         process.env.REACT_APP_BASE_URL + "/post/createPost",
@@ -51,7 +52,7 @@ const PostModal = ({ mobile }) => {
     <div className={style.container} style={{ margin: mobile && "10px" }}>
       <form onSubmit={postSubmitHandler}>
         <div className={style.caption}>
-          <div className={style.captionLabel}>ADD A CAPTION</div>
+          <div className={style.captionLabel}>Add Caption</div>
           <textarea
             className={style.caption_input}
             rows="3"
@@ -80,10 +81,10 @@ const PostModal = ({ mobile }) => {
           />
           <label htmlFor="profilePicBtn" className={style.image_btn}>
             <AddIcon
-              fontSize="large"
+              fontSize="small"
               style={{
-                color: "white",
-                backgroundColor: "#171e27",
+                color: "#1a1a1d",
+                backgroundColor: "#4e4e50",
                 borderRadius: "50%",
                 padding: "5px",
               }}

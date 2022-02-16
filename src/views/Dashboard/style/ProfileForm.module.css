@@ -18,43 +18,38 @@
 }
 
 .profile_input {
-  background-image: linear-gradient(
-    113.3deg,
-    rgba(217, 9, 27, 1) 6.9%,
-    rgba(22, 68, 150, 1) 75%
-  );
-  color: yellowgreen;
-  padding: 4% 8% 4% 2%;
-  border: none;
-  margin: 0 3% 3% 0;
-  font-size: 1.3rem;
+  background-color: inherit;
+  color: white;
+  border: 3px solid #950740;
+  padding: 10px;
+  margin: 3% 0;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  font-family: "Varela";
+  width: 90%;
+  max-width: 400px;
 }
 
 .profile_btn {
-  background-image: linear-gradient(
-    to right,
-    #c21500 0%,
-    #ffc500 51%,
-    #c21500 100%
-  );
+  background-color: #c3073f;
   transition: 0.5s;
   transition: transform 0.5s;
-  background-size: 200% auto;
   width: 80px;
-  height: 50px;
+  height: 40px;
   border: none;
   border-radius: 5px;
   font-weight: bold;
   font-size: 15px;
-  background-color: rgb(255 255 255);
+  color: white;
+  cursor: pointer;
 }
 .profile_btn:hover {
-  background-position: right center;
-  transform: scaleX(1.1);
+  transform: scaleX(1.02);
+  background-color: #950740;
 }
 
 ::-webkit-input-placeholder {
-  color: white;
+  color: #4e4e50;
 }
 
 @media (max-width: 500px) {

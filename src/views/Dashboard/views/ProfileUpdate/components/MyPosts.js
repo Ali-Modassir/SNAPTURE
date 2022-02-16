@@ -20,7 +20,6 @@ const MyPosts = () => {
   useEffect(() => {
     sendRequest(`${process.env.REACT_APP_BASE_URL}/post/getPostsById/${userId}`)
       .then((res) => {
-        console.log(res);
         if (res.ok) setPosts(res.posts);
         else setErr(res.message);
       })

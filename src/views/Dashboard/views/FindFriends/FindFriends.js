@@ -8,23 +8,26 @@ import { CircularProgress } from "@material-ui/core";
 
 const FindFriends = () => {
   const { sendRequest, isLoading } = useHttpClient();
-  const auth = useContext(AuthContext);
+  const { userId, institute } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
   useEffect(() => {
     sendRequest(
-      process.env.REACT_APP_BASE_URL + "/auth/getAllUsers/" + auth.userId
+      process.env.REACT_APP_BASE_URL + "/auth/getAllUsers",
+      "POST",
+      JSON.stringify({ userId, institute }),
+      {
+        "Content-Type": "application/json",
+      }
     )
       .then((res) => {
-        console.log(res);
         if (res.ok) {
           setUsers(res.users);
         }
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [institute, userId]);
 
   const contents = users.map((user, index) => {
-    if (user.userId === auth.userId) return;
     return (
       <ProfileCard
         profilePic={user.profilePic}
@@ -32,14 +35,13 @@ const FindFriends = () => {
         institute={user.institute}
         email={user.email}
         followers={user.followers}
-        userId={auth.userId}
+        userId={user.userId}
         followerId={user.userId}
         key={index}
       />
     );
   });
 
-  console.log(contents);
   return (
     <div className={style.container}>
       {isLoading && <CircularProgress style={{ color: "ornagered" }} />}

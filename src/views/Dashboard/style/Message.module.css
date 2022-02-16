@@ -6,13 +6,13 @@
   margin-top: 10px;
 }
 .peopleContainer {
-  padding-top: 20px;
   width: 28%;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
+  border-radius: 10px;
 }
 
 .people {
@@ -21,13 +21,13 @@
   justify-content: flex-start;
   align-items: center;
   cursor: pointer;
-  margin-bottom: 20px;
-  padding: 10px 0 10px 10px;
-  border-radius: 10px;
+  border-bottom: 1px solid rgb(54, 52, 52);
+  margin-bottom: 3px;
+  padding: 10px 0 10px 8px;
 }
 
 .name {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: white;
   margin-left: 20px;
 }
@@ -38,6 +38,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #29292b;
+  border-radius: 10px;
 }
 
 .message {
@@ -72,61 +74,75 @@
 }
 
 .messageBtn {
-  background-image: linear-gradient(
-    to right,
-    #c21500 0%,
-    #ffc500 51%,
-    #c21500 100%
-  );
+  background-color: #950740;
   transition: 0.5s;
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  font-size: 1.5rem;
-  border: none;
   color: white;
   margin: 2%;
-  background-color: rgb(255 255 255);
+  border: 2px solid white;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .messageBtn:hover {
-  background-position: right center;
-  transform: scaleX(1.1);
+  transform: scaleX(1.05);
 }
 
 .senderContainer {
-  background-image: radial-gradient(
-    circle farthest-corner at 10% 20%,
-    rgba(247, 87, 0, 1) 0%,
-    rgba(249, 0, 0, 1) 90.1%
-  );
+  background-color: #6f2232;
   width: 50%;
   word-wrap: break-word;
   margin: 2%;
-  border-radius: 20px;
+  border-radius: 12px;
+  border-top-right-radius: 0;
   padding: 2%;
   margin-left: auto;
   color: white;
+  font-family: "Montserrat";
 }
 
 .receiverContainer {
-  background-image: linear-gradient(
-    73.1deg,
-    rgba(34, 126, 34, 1) 8%,
-    rgba(99, 162, 17, 1) 86.9%
-  );
+  background-color: #1a1a1d;
   width: 50%;
   word-wrap: break-word;
   margin: 2%;
-  border-radius: 20px;
+  border-radius: 12px;
+  border-top-left-radius: 0;
   padding: 2%;
   color: white;
+  font-family: "Montserrat";
 }
 
 .heading {
-  font-size: 2rem;
+  font-size: 1.3rem;
   margin: auto auto;
   color: white;
+}
+
+.heading2 {
+  font-size: 1rem;
+  color: #737379;
+}
+
+.heading2 span {
+  color: #950740;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.heading3 {
+  font-size: 1rem;
+  color: #737379;
+  margin: auto auto;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.activeFriend {
+  background-color: #29292b;
 }
 
 @media (max-width: 500px) {

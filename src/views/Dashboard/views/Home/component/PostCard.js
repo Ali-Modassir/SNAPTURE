@@ -54,8 +54,8 @@ const PostCard = ({ props }) => {
       <div className={style.profileDetails}>
         <Avatar
           style={{
-            backgroundColor: "orangered",
-            margin: "10px 10px 10px 25px",
+            backgroundColor: "#950740",
+            margin: "10px 8px 10px 10px",
           }}
         />
         <div className={style.profileName}>{userName}</div>
@@ -65,8 +65,7 @@ const PostCard = ({ props }) => {
         <div className={style.caption}>{caption}</div>
         <div className={style.like}>
           <FavoriteIcon
-            style={{ color: liked ? "red" : "grey" }}
-            fontSize="large"
+            style={{ color: liked ? "#C3073F" : "#4e4e50", cursor: "pointer" }}
             onClick={likeCounterHandler}
           />
           <div className={style.count}>{likeIds.size}</div>

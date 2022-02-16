@@ -36,9 +36,7 @@ const ProfileForm = () => {
   const [previewSrc, setPreviewSrc] = useState("");
   const [file, setFile] = useState(null);
   const fileReader = new FileReader();
-  fileReader.onload = () => {
-    setPreviewSrc(fileReader.result);
-  };
+  fileReader.onload = () => setPreviewSrc(fileReader.result);
   if (file) fileReader.readAsDataURL(file);
 
   return (
@@ -54,55 +52,37 @@ const ProfileForm = () => {
       <Avatar
         src={previewSrc || "/broken-image.jpg"}
         style={{
-          height: "200px",
-          width: "200px",
-          backgroundColor: "#1e0c32",
+          height: "180px",
+          width: "180px",
+          backgroundColor: "inherit",
+          color: "#4e4e50",
         }}
       />
       <label htmlFor="profilePicBtn" className={style.image_btn}>
         <AddIcon
-          fontSize="large"
           style={{
             color: "black",
-            backgroundColor: "orangered",
+            backgroundColor: "#950740",
             borderRadius: "50%",
             padding: "5px",
+            cursor: "pointer",
           }}
         />
       </label>
       <div className={style.form_row}>
         <input
           type="text"
-          name="firstName"
-          placeholder="First Name"
-          className={style.profile_input}
-        />
-        <input
-          type="text"
-          name="lastName"
-          placeholder="Last Name"
+          name="userName"
+          placeholder="@username"
           className={style.profile_input}
         />
       </div>
-      <div className={style.form_row}>
-        <input
-          name="institute"
-          type="text"
-          placeholder="Institute / University"
-          className={style.profile_input}
-        />
-        <input
-          name="division"
-          type="text"
-          placeholder="Division / Branch"
-          className={style.profile_input}
-        />
-      </div>
+      <div className={style.form_row}></div>
       {isLoading ? (
         <CircularProgress style={{ color: "orangered" }} />
       ) : (
         <button type="submit" className={style.profile_btn}>
-          &gt;&gt;
+          Update
         </button>
       )}
     </form>

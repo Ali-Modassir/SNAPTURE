@@ -10,13 +10,13 @@ const RightSidebar = () => {
   const auth = useContext(AuthContext);
   const { sendRequest } = useHttpClient();
   const [profile, setProfile] = useState({});
+  const [userName, setName] = useState(auth.userName);
   useEffect(() => {
     sendRequest(
       process.env.REACT_APP_BASE_URL + "/auth/profileDetails/" + auth.userId
     )
       .then((res) => {
         if (res.ok) {
-          console.log(res);
           setProfile(res._doc.local);
         }
       })
@@ -42,13 +42,13 @@ const RightSidebar = () => {
             <Avatar
               src={profile.profilePic || "/broken-image.jpg"}
               style={{
-                height: "150px",
-                width: "150px",
+                height: "100px",
+                width: "100px",
                 backgroundColor: "#1e0c32",
               }}
             />
           </div>
-          <div className={style.name}>{profile.name || auth.userName}</div>
+          <div className={style.name}>{profile.userName || auth.userName}</div>
           <div className={style.branch}>
             {profile.institute || "Add Description"}
           </div>
@@ -77,9 +77,13 @@ const RightSidebar = () => {
           </div>
         </div>
         <div className={style.createPost}>
-          <button className={style.createPostBtn} onClick={modalOpenHandler}>
+          <div className={style.button2} onClick={modalOpenHandler}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
             CREATE POST
-          </button>
+          </div>
           <Modal open={modalOpen} onClose={modalCloseHandler}>
             <Grow
               in={modalOpen}

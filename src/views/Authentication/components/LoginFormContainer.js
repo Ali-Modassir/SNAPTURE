@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { CircularProgress } from "@material-ui/core";
 
@@ -30,7 +30,6 @@ const LoginFormContainer = () => {
         .then((res) => {
           if (res.ok) {
             toast.success("Logged In", { position: "top-right" });
-            console.log(res);
             auth.login(
               res.userName,
               res.userEmail,
@@ -52,33 +51,34 @@ const LoginFormContainer = () => {
   };
 
   return (
-    <div className={classes.form_container}>
-      <form onSubmit={authFormSubmitHandler}>
-        <div className={classes.form_row}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            className={classes.auth_input}
-          />
-        </div>
-        <div className={classes.form_row}>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className={classes.auth_input}
-          />
-        </div>
-        {isLoading ? (
-          <CircularProgress style={{ color: "orangered" }} />
-        ) : (
+    <form onSubmit={authFormSubmitHandler} className={classes.form_container}>
+      <div className={classes.inputWrapper}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          className={classes.auth_input}
+        />
+      </div>
+
+      <div className={classes.inputWrapper}>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          className={classes.auth_input}
+        />
+      </div>
+      {isLoading ? (
+        <CircularProgress style={{ color: "orangered" }} />
+      ) : (
+        <div className={classes.inputWrapper}>
           <button type="submit" className={classes.auth_btn}>
-            &gt;&gt;
+            Login
           </button>
-        )}
-      </form>
-    </div>
+        </div>
+      )}
+    </form>
   );
 };
 

@@ -1,9 +1,5 @@
 .container {
-  background-image: linear-gradient(
-    113.3deg,
-    rgba(217, 9, 27, 1) 6.9%,
-    rgba(22, 68, 150, 1) 75%
-  );
+  background-color: #1a1a1d;
   display: flex;
   width: 30%;
   height: 70%;
@@ -34,30 +30,17 @@
   margin: 10px;
   color: black;
   font-size: 1.2rem;
-  color: wheat;
+  color: #79797c;
 }
 .caption_input {
   width: 90%;
   font-size: 1.2rem;
   padding: 3%;
-  border-radius: 20px;
-  border: 4px solid orangered;
-  color: yellow;
-  background-image: linear-gradient(
-    to left bottom,
-    #170736,
-    #180834,
-    #180833,
-    #190931,
-    #190a30,
-    #1f0c32,
-    #260d34,
-    #2d0e36,
-    #3d0e3a,
-    #4c0d3c,
-    #5c0c3c,
-    #6b0b3b
-  );
+  border-radius: 5px;
+  border: 2px solid #c3073f;
+  color: white;
+  background-color: inherit;
+  font-family: "Montserrat";
 }
 
 .image {
@@ -75,14 +58,9 @@
 }
 
 .addPostBtn {
-  background-image: linear-gradient(
-    to right,
-    #c21500 0%,
-    #ffc500 51%,
-    #c21500 100%
-  );
+  background-color: #950740;
   margin: 10px;
-  padding: 15px 35px;
+  padding: 12px 30px;
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
@@ -92,10 +70,10 @@
   border-radius: 10px;
   display: block;
   border: none;
+  cursor: pointer;
 }
 
 .addPostBtn:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
+  background-color: #c3073f;
   text-decoration: none;
 }

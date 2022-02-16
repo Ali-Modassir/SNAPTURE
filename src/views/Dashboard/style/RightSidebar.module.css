@@ -13,7 +13,7 @@
 .profileCard {
   margin-top: 80px;
   height: 45vh;
-  width: 90%;
+  width: 75%;
   border-radius: 20px;
   box-shadow: -2px 6px 16px 1px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: -2px 6px 16px 1px rgba(0, 0, 0, 0.75);
@@ -22,39 +22,34 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  transition: transform 0.5s;
 }
+
 .profileCard:hover {
   background-position: right center;
-  transform: rotate(2deg);
 }
 
 .profileImg img {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  border: 2px solid whitesmoke;
 }
 
 .name {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: white;
 }
 .branch {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   color: grey;
   margin-top: -20px;
+  width: 80%;
+  text-align: center;
 }
 
 .updateProfileBtn {
-  background-image: linear-gradient(
-    to right,
-    #c21500 0%,
-    #ffc500 51%,
-    #c21500 100%
-  );
+  background-color: inherit;
   margin: 10px;
-  padding: 15px 35px;
+  padding: 10px 20px;
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
@@ -64,11 +59,13 @@
   border-radius: 10px;
   display: block;
   cursor: pointer;
-  border: none;
+  border: 3px solid #6f2232;
+  font-weight: bold;
+  font-family: "Monstrett";
 }
 
 .updateProfileBtn:hover {
-  background-position: right center; /* change the direction of the change here */
+  background-position: right center;
   color: #fff;
   text-decoration: none;
 }
@@ -76,7 +73,7 @@
 .profileStats {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 65%;
   text-align: center;
 }
 
@@ -89,11 +86,11 @@
 .number {
   font-family: "Montserrat";
   margin-bottom: 10px;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   color: white;
 }
 .stateName {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 
 .createPost {
@@ -104,12 +101,7 @@
 }
 
 .createPostBtn {
-  background-image: linear-gradient(
-    to right,
-    #c21500 0%,
-    #ffc500 51%,
-    #c21500 100%
-  );
+  background-color: inherit;
   width: 250px;
   height: 250px;
   border: none;
@@ -131,5 +123,108 @@
 @media (max-width: 500px) {
   .container {
     display: none;
+  }
+}
+
+/* button css */
+
+.button2 {
+  position: relative;
+  display: inline-block;
+  padding: 20px 60px;
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  margin: 25px;
+  font-family: "Alegreya", sans-serif;
+  filter: hue-rotate(0deg);
+  border: 2px solid #d2bdff;
+  transition: all 0.1s linear;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+.button2:hover {
+  border: 1px solid transparent;
+}
+.button2:hover span {
+  position: absolute;
+  display: block;
+}
+.button2:hover span:nth-child(1) {
+  filter: hue-rotate(0deg);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #3a86ff);
+  animation: animate1 1s linear infinite;
+}
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+.button2:hover span:nth-child(2) {
+  filter: hue-rotate(60deg);
+  top: -100%;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #3a86ff);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+.button2:hover span:nth-child(3) {
+  filter: hue-rotate(120deg);
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background: linear-gradient(270deg, transparent, #3a86ff);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+@keyframes animate3 {
+  0% {
+    right: -100%;
+    height: 3px;
+  }
+  50%,
+  100% {
+    height: 2px;
+    right: 100%;
+  }
+}
+.button2:hover span:nth-child(4) {
+  filter: hue-rotate(300deg);
+  bottom: -100%;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #3a86ff);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
   }
 }
