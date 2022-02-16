@@ -1,15 +1,12 @@
-const express = require("express");
 const uploadImage = require("../fileUpload/fileUpload");
-const Post = require("../models/Post");
 const AllPost = require("../models/AllPost");
 const { v1: uuid } = require("uuid");
 
 //create-post
 module.exports.create_post = async (req, res) => {
   try {
-    const { userId, userName, userEmail, caption, location } = req.body;
+    const { userId, userName, caption, location } = req.body;
     const myFile = req.file;
-
     const image = await uploadImage(myFile);
     const imageUrl = image.url;
     if (!imageUrl)
@@ -18,25 +15,6 @@ module.exports.create_post = async (req, res) => {
         .json({ message: "Unable to upload Image", ok: false });
     const postId = uuid();
     const uploadDate = Date.now();
-    const newPost = {
-      imageUrl,
-      caption,
-      postId,
-      uploadDate,
-    };
-    const getUser = await Post.findOne({ userId });
-    if (getUser) {
-      getUser.posts.push(newPost);
-      getUser.save();
-    } else {
-      const newUser = await Post.create({
-        userId,
-        userName,
-        userEmail,
-        posts: [newPost],
-      });
-      await newUser.save();
-    }
     const latestPost = {
       userId,
       userName,
@@ -58,34 +36,21 @@ module.exports.create_post = async (req, res) => {
 //update_like
 module.exports.updateLike = async (req, res) => {
   try {
-    const { userId, postId, type, userLikedId } = req.body;
-    const getPost = await Post.findOne({
-      userId: userId,
-      posts: { $elemMatch: { postId: postId } },
-    });
-    if (!getPost) {
-      return res.json({ message: "Post Not found", ok: false });
-    }
-    var set = new Set(getPost.posts[0].like);
-    if (type) {
+    const { postId, userLikedId } = req.body;
+    const getPost = await AllPost.findOne({ postId });
+    if (!getPost) return res.json({ message: "Post not found", ok: false });
+    const set = new Set(getPost.like);
+    if (set.has(userLikedId)) {
       set.delete(userLikedId);
-    } else if (!type) {
-      if (set.has(userLikedId))
-        return res.json({ message: "Already Liked", ok: false });
+      getPost.like = Array.from(set);
+      getPost.save();
+      return res.json({ message: "Disliked", ok: true });
+    } else {
       set.add(userLikedId);
+      getPost.like = Array.from(set);
+      getPost.save();
+      return res.json({ message: "Liked", ok: true });
     }
-    getPost.posts[0].like = Array.from(set);
-    getPost.save();
-
-    const allPost = await AllPost.findOne({ postId });
-    if (!allPost) return res.json({ message: "Post Not found", ok: false });
-    allPost.like = Array.from(set);
-    allPost.save();
-    return res.json({
-      likes: getPost.posts[0].like,
-      ok: true,
-      message: "updated",
-    });
   } catch (err) {
     console.log(err);
     return res.json({ message: "Something went Wrong", ok: false });
