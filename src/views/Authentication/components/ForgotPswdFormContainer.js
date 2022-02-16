@@ -51,7 +51,7 @@ const ForgotPswdFormContainer = () => {
           />
         </div>
         {isLoading ? (
-          <CircularProgress style={{ color: "orangered" }} />
+          <CircularProgress style={{ color: "#c3073f" }} />
         ) : (
           <button type="submit" className={classes.auth_btn}>
             &gt;&gt;

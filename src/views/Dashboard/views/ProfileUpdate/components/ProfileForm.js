@@ -79,7 +79,7 @@ const ProfileForm = () => {
       </div>
       <div className={style.form_row}></div>
       {isLoading ? (
-        <CircularProgress style={{ color: "orangered" }} />
+        <CircularProgress style={{ color: "#c3073f" }} />
       ) : (
         <button type="submit" className={style.profile_btn}>
           Update

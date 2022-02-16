@@ -31,7 +31,7 @@ const Posts = () => {
           console.log(err);
         });
     }, 500);
-  }, []);
+  }, [institute]);
 
   var posts = null;
   if (data) {
@@ -57,7 +57,7 @@ const Posts = () => {
         </Modal>
       </div>
       <div className={style.container}>
-        {isLoading && <CircularProgress style={{ color: "orangered" }} />}
+        {isLoading && <CircularProgress style={{ color: "#c3073f" }} />}
         {posts || <div className={style.error}>{error}</div>}
       </div>
     </>

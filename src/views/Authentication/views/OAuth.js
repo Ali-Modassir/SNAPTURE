@@ -32,7 +32,7 @@ const OAuth = () => {
           console.log(err);
         });
     }
-  }, []);
+  }, [token]);
 
   return (
     <div
@@ -44,7 +44,7 @@ const OAuth = () => {
         alignItems: "center",
       }}
     >
-      {isLoading && <CircularProgress />}
+      {isLoading && <CircularProgress style={{ color: "#c3073f" }} />}
       <h2>{!token && "Token Expired"}</h2>
     </div>
   );

@@ -24,18 +24,18 @@ const MyPosts = () => {
         else setErr(res.message);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [userId]);
 
   return (
     <>
       <div className={style.container}>
-        {isLoading && <CircularProgress style={{ color: "orangered" }} />}
+        {isLoading && <CircularProgress style={{ color: "#c3073f" }} />}
         {reqData || (
           <div
             style={{
               fontSize: "1.5rem",
               marginRight: "auto",
-              color: "orangered",
+              color: "#c3073f",
             }}
           >
             {err}

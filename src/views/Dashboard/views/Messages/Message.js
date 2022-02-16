@@ -107,7 +107,7 @@ const Message = () => {
         </>
       )}
       <div className={style.container}>
-        {isLoading && <CircularProgress style={{ color: "orangered" }} />}
+        {isLoading && <CircularProgress style={{ color: "#c3073f" }} />}
         <div className={style.peopleContainer}>
           {friends.map((friend, index) => {
             if (index === 0)

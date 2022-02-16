@@ -8,12 +8,12 @@ import { useHttpClient } from "../../../customHooks/httpHook";
 
 const RightSidebar = () => {
   const auth = useContext(AuthContext);
+  const userId = auth.userId;
   const { sendRequest } = useHttpClient();
   const [profile, setProfile] = useState({});
-  const [userName, setName] = useState(auth.userName);
   useEffect(() => {
     sendRequest(
-      process.env.REACT_APP_BASE_URL + "/auth/profileDetails/" + auth.userId
+      process.env.REACT_APP_BASE_URL + "/auth/profileDetails/" + userId
     )
       .then((res) => {
         if (res.ok) {
@@ -21,7 +21,7 @@ const RightSidebar = () => {
         }
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [userId]);
 
   const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);

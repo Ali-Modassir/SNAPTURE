@@ -44,7 +44,7 @@ const FindFriends = () => {
 
   return (
     <div className={style.container}>
-      {isLoading && <CircularProgress style={{ color: "ornagered" }} />}
+      {isLoading && <CircularProgress style={{ color: "#c3073f" }} />}
       {!!contents && !!contents[0] && (
         <ProfileScroll contents={contents} activeSlide={0} />
       )}

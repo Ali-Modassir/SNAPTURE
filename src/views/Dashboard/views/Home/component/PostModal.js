@@ -92,7 +92,7 @@ const PostModal = ({ mobile }) => {
           </label>
         </div>
         {isLoading ? (
-          <CircularProgress />
+          <CircularProgress style={{ color: "#c3073f" }} />
         ) : (
           <button type="submit" className={style.addPostBtn}>
             ADD POST
