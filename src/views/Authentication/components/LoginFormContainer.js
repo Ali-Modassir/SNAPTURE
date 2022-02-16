@@ -30,7 +30,6 @@ const LoginFormContainer = () => {
         .then((res) => {
           if (res.ok) {
             toast.success("Logged In", { position: "top-right" });
-            console.log(res);
             auth.login(
               res.userName,
               res.userEmail,
