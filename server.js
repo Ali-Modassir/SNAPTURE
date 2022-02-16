@@ -44,7 +44,7 @@ app.use((error, req, res, next) => {
 
 //Setting up database and backend Server
 const PORT = process.env.PORT || 8000;
-const CONNECTION_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.kyz02.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const CONNECTION_URL = process.env.DB_URL;
 
 mongoose
   .connect(CONNECTION_URL, {

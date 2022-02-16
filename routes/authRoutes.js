@@ -18,7 +18,7 @@ router.post(
   profileController.updateProfile
 );
 router.get("/profileDetails/:id", profileController.getProfileDetails);
-router.get("/getAllUsers/:userId", authController.getAllUsers);
+router.post("/getAllUsers/", authController.getAllUsers); //getting users by location
 router.get("/addFollower/:query", authController.addFollower);
 router.get("/allFriends/:userId", authController.getAllFriends);
 router.post("/feedback", authController.getFeedback);

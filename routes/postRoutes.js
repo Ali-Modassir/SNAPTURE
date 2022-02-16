@@ -8,7 +8,7 @@ const router = Router();
 //base-api = /api/post
 
 router.post("/createPost", multer.single("file"), postController.create_post);
-router.get("/getPosts", postController.getPost);
+router.get("/getPosts/:location", postController.getPost);
 router.post("/like", postController.updateLike);
 router.get("/getPostsById/:userId", postController.getPostsById);
 module.exports = router;

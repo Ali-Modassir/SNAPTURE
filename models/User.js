@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   },
 
   local: {
-    name: String,
+    userName: String,
     email: {
       type: String,
       validate: [isEmail, "Please enter a valid email"],
@@ -27,8 +27,8 @@ const userSchema = new mongoose.Schema({
     followers: Array,
     following: Array,
     friend: [
-      { 
-        conversationId:String,
+      {
+        conversationId: String,
         friendId: String,
         friendName: String,
         friendProfilePic: String,

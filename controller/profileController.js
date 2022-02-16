@@ -1,24 +1,39 @@
 const User = require("../models/User");
-const uploadImage = require("../googleStorage/fileUpload");
+const uploadImage = require("../fileUpload/fileUpload");
+const jwt = require("jsonwebtoken");
+
+// create json web token
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_KEY, {
+    expiresIn: maxAge,
+  });
+};
 
 module.exports.updateProfile = async (req, res) => {
   try {
-    const { userId, firstName, lastName, institute, division } = req.body;
+    const { userId } = req.body;
     const myFile = req.file;
-    const profilePic = await uploadImage(myFile);
-    var name = null;
-    if (firstName && lastName) name = firstName + " " + lastName;
+    var profilePic = null;
+    if (myFile) profilePic = await uploadImage(myFile);
 
-    const user = await User.findByIdAndUpdate(userId, {
-      $set: {
-        "local.name": name || local.name,
-        "local.profilePic": profilePic || local.profilePic,
-        "local.institute": institute || local.institute,
-        "local.division": division || local.division,
-      },
+    const data = {};
+    Object.keys(req.body).forEach((key) => {
+      if (key != "userId") data[`local.${key}`] = req.body[key];
     });
-    if (user) return res.json({ message: "Profile Updated", ok: true });
-    else return res.json({ message: "User Not found", ok: false });
+
+    if (!!profilePic && !!profilePic.url)
+      data[`local.profilePic`] = profilePic.url;
+
+    const user = await User.findByIdAndUpdate(userId, { $set: data });
+    if (user) {
+      const token = createToken(user._id);
+      return res.json({
+        message: "Profile Updated",
+        ok: true,
+        token,
+      });
+    } else return res.json({ message: "User Not found", ok: false });
   } catch (err) {
     console.log(err);
     return res.json({ message: "Unable to update file", ok: false });
