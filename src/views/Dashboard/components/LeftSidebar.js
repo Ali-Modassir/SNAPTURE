@@ -8,7 +8,7 @@ const LeftSidebar = ({ routes, mobile }) => {
   const leftSidebarStyle = mobile
     ? {
         backgroundColor: mobile && "#242129",
-        width: "300px",
+        width: "280px",
         minHeight: "100vh",
         overflowY: "hidden",
       }

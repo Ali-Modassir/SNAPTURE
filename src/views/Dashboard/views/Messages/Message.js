@@ -4,6 +4,8 @@ import { Avatar, CircularProgress } from "@material-ui/core";
 import db from "../../../../firebase/firebase";
 import { useHttpClient } from "../../../../customHooks/httpHook";
 import { AuthContext } from "../../../../context/authContext";
+import { useHistory } from "react-router-dom";
+import SendIcon from "@material-ui/icons/Send";
 
 const Message = () => {
   const { sendRequest, isLoading } = useHttpClient();
@@ -15,6 +17,7 @@ const Message = () => {
   const [currFriendId, setCurrFriendId] = useState(null);
   const [loading, setIsLoading] = useState(false);
   const [conversationId, setConversationId] = useState(null);
+  const history = useHistory();
 
   const chatHandler = (friendId) => {
     if (!!friends) {
@@ -27,6 +30,7 @@ const Message = () => {
     }
   };
 
+  //Sending message to firebase
   const messageSendHandler = () => {
     const reqData = {
       inpMsg,
@@ -48,6 +52,7 @@ const Message = () => {
     if (e.code === "Enter") messageSendHandler();
   };
 
+  //getting data from firebase
   useEffect(() => {
     try {
       setIsLoading(true);
@@ -57,7 +62,6 @@ const Message = () => {
         const data = Object.keys(newMessage).map((key) => {
           return newMessage[key];
         });
-        console.log(data);
         setChats(data);
         setIsLoading(false);
       });
@@ -92,7 +96,15 @@ const Message = () => {
   return (
     <>
       {friends.length === 0 && (
-        <div className={style.heading}>No Friends For Chat</div>
+        <>
+          <div className={style.heading}>Make friend to start converstion.</div>
+          <div className={style.heading2}>
+            Start making friends from here. . . .
+            <span onClick={() => history.push("/dash/findFriends")}>
+              Find Friends
+            </span>
+          </div>
+        </>
       )}
       <div className={style.container}>
         {isLoading && <CircularProgress style={{ color: "orangered" }} />}
@@ -101,27 +113,36 @@ const Message = () => {
             if (index === 0)
               if (currFriendId == null) setCurrFriendId(friend.friendId);
             return (
-              <div
-                className={style.people}
-                onClick={() => chatHandler(friend.friendId)}
-                key={index}
-                style={{
-                  backgroundColor: friend.friendId === currFriendId && "black",
-                }}
-              >
-                <Avatar
-                  src={friend.friendProfilePic || "/broken-image.jpg"}
-                  style={{ background: "transparent", color: "white" }}
-                />
-                <div className={style.name}>{friend.friendName}</div>
-              </div>
+              <>
+                <div
+                  className={`${style.people} ${
+                    friend.friendId === currFriendId && style.activeFriend
+                  }`}
+                  onClick={() => chatHandler(friend.friendId)}
+                  key={index}
+                  style={{
+                    "border-radius": index === 0 ? "10px 10px 2px 2px" : "0",
+                  }}
+                >
+                  <Avatar
+                    src={friend.friendProfilePic || "/broken-image.jpg"}
+                    style={{
+                      background: "transparent",
+                      color: "white",
+                      height: "30px",
+                      width: "30px",
+                    }}
+                  />
+                  <div className={style.name}>{friend.friendName}</div>
+                </div>
+              </>
             );
           })}
         </div>
         <div className={style.chatContainer}>
           <div className={style.message} ref={messageEl}>
-            {chats.length === 0 && (
-              <div className={style.heading}>Start Conversation</div>
+            {friends.length > 0 && chats.length === 0 && (
+              <div className={style.heading3}>Start Conversation</div>
             )}
             {chats.map((chat, index) => {
               if (chat.userId === userId) {
@@ -150,7 +171,7 @@ const Message = () => {
                 onKeyPress={handleKeyPress}
               />
               <button className={style.messageBtn} onClick={messageSendHandler}>
-                &gt;
+                <SendIcon />
               </button>
             </div>
           )}

@@ -45,8 +45,6 @@ const ProfileCard = ({
       </div>
       <div className={style.name}>{name}</div>
       <div className={style.branch}>{email}</div>
-      <div className={style.branch}>{institute}</div>
-
       <button className={style.followBtn} onClick={followHandler}>
         {following ? "Following" : "Follow"}
       </button>

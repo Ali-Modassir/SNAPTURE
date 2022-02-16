@@ -8,12 +8,12 @@
   color: white;
 }
 .routeName {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   font-family: "Rakkas";
 }
 .userName {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   font-weight: bold;
 }
 
@@ -25,6 +25,6 @@
     width: 70%;
   }
   .routeName {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 }

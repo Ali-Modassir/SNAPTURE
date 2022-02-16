@@ -9,7 +9,7 @@ import {
 import ForgotPassword from "./views/Authentication/views/ForgotPassword";
 import ResetPassword from "./views/Authentication/views/ResetPassword";
 import DashLayout from "./views/Dashboard/DashLayout";
-// import ProfileUpdate from './views/Dashboard/views/'
+import Onboarding from "./views/Authentication/views/Onboarding";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -35,15 +35,10 @@ const App = () => {
     institute,
   } = useAuth();
   const { newsData } = useNewsHook();
+
   let route = null;
-  if (token)
-    route = (
-      <Switch>
-        <Route path="/dash" component={DashLayout} />
-        <Redirect to="/dash" />
-      </Switch>
-    );
-  else {
+
+  if (!token) {
     route = (
       <Switch>
         <Route path="/auth" exact component={Authentication} />
@@ -54,7 +49,21 @@ const App = () => {
         <Redirect to="/auth" />
       </Switch>
     );
-  }
+  } else if (!userName) {
+    route = (
+      <Switch>
+        <Route path="/onboarding" component={Onboarding} />
+        <Redirect to="/onboarding" />
+      </Switch>
+    );
+  } else
+    route = (
+      <Switch>
+        <Route path="/dash" component={DashLayout} />
+        <Redirect to="/dash" />
+      </Switch>
+    );
+
   return (
     <>
       <ToastContainer />

@@ -10,18 +10,18 @@
 }
 
 .brandlogo {
-  margin-top: 50px;
-  width: 250px;
+  margin-top: 18px;
+  width: 220px;
 }
 .brandLogoImg {
-  width: 100%;
+  width: 80%;
   object-fit: contain;
-  filter: invert(24%) sepia(64%) saturate(2430%) hue-rotate(358deg)
-    brightness(97%) contrast(111%);
+  filter: invert(30%) sepia(120%) saturate(3056%) hue-rotate(-50deg)
+    brightness(82%) contrast(433%);
 }
 
 .routes {
-  margin-top: 50px;
+  margin-top: 65px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -31,24 +31,19 @@
 
 .routes_links {
   text-decoration: none;
-  font-size: 1.1rem;
-  padding: 5%;
-  width: 80%;
+  font-size: 1rem;
+  padding: 4%;
+  width: 70%;
   border-radius: 5px;
   margin-bottom: 10px;
 }
 .active_route_links {
-  background-image: linear-gradient(
-    to right,
-    #c21500 0%,
-    #ffc500 51%,
-    #c21500 100%
-  );
+  background-color: #950740;
   transition: 0.5s;
   background-size: 200% auto;
 }
 .active_route_links:hover {
-  background-position: right center; /* change the direction of the change here */
+  background-position: right center;
 }
 
 .route {

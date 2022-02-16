@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import classes from "../styles/Authentication.module.css";
 //components
 import SignUpFormContainer from "../components/SignUpFormContainer";
@@ -15,6 +14,9 @@ const Authentication = () => {
 
   return (
     <div className={classes.auth_container}>
+      <div className={classes.stars}></div>
+      <div className={classes.stars2}></div>
+      <div className={classes.stars3}></div>
       <div className={classes.auth_card}>
         <div className={classes.card_left}>
           <div className={classes.card_left_heading}>WELCOME TO</div>
@@ -23,10 +25,6 @@ const Authentication = () => {
             alt="brandLogo"
             className={classes.brandlogo_left}
           />
-          <div className={classes.ownerDesciption}>
-            Designed and Developed By
-            <span className={classes.changeColor2}>Modassir</span>
-          </div>
         </div>
         <div className={classes.card_right}>
           <img src={Brandlogo} alt="brandLogo" className={classes.brandlogo} />

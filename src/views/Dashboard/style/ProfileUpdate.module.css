@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Allura&display=swap");
 .container {
   width: 100%;
   display: flex;
@@ -6,7 +7,8 @@
 }
 
 .heading {
-  font-size: 2rem;
-  color: white;
+  font-size: 2.5rem;
+  font-family: "Allura", cursive;
+  color: #c3073f;
   margin: 30px;
 }

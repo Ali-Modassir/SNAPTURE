@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { CircularProgress } from "@material-ui/core";
 
@@ -11,15 +11,53 @@ import classes from "../styles/FormContainer.module.css";
 const FormContainer = () => {
   const { sendRequest, isLoading } = useHttpClient();
 
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const [emailFormatError, setEmailFrmtErr] = useState(null);
+  const [pswdFrmtErr, setPswdFrmtErr] = useState(null);
+
+  const validateEmail = (email) => {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
+  //password validate
+  const validatePassword = (pswd) => {
+    const pswdRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    return pswdRegex.test(pswd);
+  };
+
+  useEffect(() => {
+    if (email === null) return;
+    if (!validateEmail(email)) {
+      setEmailFrmtErr("Invalid Email Address");
+    } else setEmailFrmtErr(null);
+  }, [email]);
+
+  useEffect(() => {
+    if (password === null) return;
+    if (!validatePassword(password)) {
+      setPswdFrmtErr(
+        "Min 8 letter password, with at least a symbol, upper and lower case letters and a number"
+      );
+    } else setPswdFrmtErr(null);
+  }, [password]);
+
   //FormSubmitHandler
   const authFormSubmitHandler = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    if (pswdFrmtErr || emailFormatError) {
+      toast.warn("Invalid Inputs");
+      return;
+    }
+    const data = JSON.stringify({ email, password });
+
     setTimeout(() => {
       sendRequest(
         process.env.REACT_APP_BASE_URL + "/auth/signup",
         "POST",
-        JSON.stringify(Object.fromEntries(formData)),
+        data,
         {
           "Content-Type": "application/json",
         }
@@ -43,51 +81,39 @@ const FormContainer = () => {
 
   return (
     <div className={classes.form_container}>
-      <form onSubmit={authFormSubmitHandler}>
-        <div className={classes.form_row}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            className={classes.auth_input}
-          />
-        </div>
-        <div className={classes.form_row}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            className={classes.auth_input}
-          />
-          <input
-            type="text"
-            name="institute"
-            placeholder="College/Institute"
-            className={classes.auth_input}
-          />
-        </div>
-        <div className={classes.form_row}>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className={classes.auth_input}
-          />
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Repeat"
-            className={classes.auth_input}
-          />
-        </div>
-        {isLoading ? (
-          <CircularProgress style={{ color: "orangered" }} />
-        ) : (
-          <button type="submit" className={classes.auth_btn}>
-            &gt;&gt;
+      <div className={classes.inputWrapper}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          className={classes.auth_input}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <label>{emailFormatError}</label>
+      </div>
+      <div className={classes.inputWrapper}>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          className={classes.auth_input}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <label>{pswdFrmtErr}</label>
+      </div>
+      {isLoading ? (
+        <CircularProgress style={{ color: "orangered" }} />
+      ) : (
+        <div className={classes.inputWrapper}>
+          <button
+            type="submit"
+            onClick={authFormSubmitHandler}
+            className={classes.auth_btn}
+          >
+            Get Started
           </button>
-        )}
-      </form>
+        </div>
+      )}
     </div>
   );
 };

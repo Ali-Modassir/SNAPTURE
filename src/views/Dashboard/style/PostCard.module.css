@@ -1,30 +1,31 @@
 .container {
   max-width: 100%;
-  margin: 30px;
+  margin: 15px;
   margin-left: 0;
-  transition: transform 0.9s;
+  transition: transform 0.8s;
   max-width: 1000px;
 }
+
 .container:hover {
-  transform: scale(1.05);
+  transform: scale(1.005);
 }
 
 .profileDetails {
   width: 80%;
   display: flex;
-  background-image: radial-gradient(
-    circle 1224px at 10.6% 8.8%,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(153, 202, 251, 1) 100.2%
-  );
-  border-radius: 10px 10px 0 0;
+  background-color: #1a1a1d;
+  border-radius: 20px 20px 0 0;
   align-items: center;
+  color: white;
+  border: 2px solid #950740;
+  border-bottom: none;
 }
+
 .profileName {
-  font-size: 1.3rem;
+  font-size: 1rem;
   display: flex;
   justify-content: center;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .image {
@@ -32,50 +33,58 @@
   object-fit: contain;
   border-top: none;
   border-bottom: none;
+  border: 2px solid #950740;
+  border-top: none;
+  border-end-end-radius: 5px;
+  border-end-start-radius: 5px;
 }
 
 .postCardDetails {
-  background-image: radial-gradient(
-    circle 1224px at 10.6% 8.8%,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(153, 202, 251, 1) 100.2%
-  );
   width: 78%;
   margin-top: 0;
-  border-radius: 0 0 10px 10px;
-  padding: 1%;
+  border-radius: 5px 5px 20px 20px;
+  padding: 5px;
   overflow-x: hidden;
   text-align: left;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   font-family: "Ubuntu" sans-serif;
+  border: 2px solid #950740;
 }
 
 .caption {
-  font-size: 1.2rem;
-  padding: 0 10px 10px 10px;
+  font-size: 1rem;
+  padding: 0 10px 3px 5px;
   max-width: 900px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   word-break: break-all;
-  color: black;
+  color: white;
+  font-family: "Montserrat";
 }
 
 .like {
   display: flex;
   align-items: center;
-  padding-left: 10px;
+  padding-left: 5px;
 }
 
 .count {
   font-family: "Monstrett";
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   margin-left: 10px;
-  color: rgb(94, 72, 72);
+  color: white;
   font-family: "Ubuntu" sans-serif;
   margin-right: 10px;
+  margin-bottom: 3px;
+}
+
+.time {
+  color: white;
+  font-size: 0.8rem;
+  font-family: "Montserrat";
 }
 
 @media (max-width: 500px) {

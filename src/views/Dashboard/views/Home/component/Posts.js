@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import style from "../../../style/Posts.module.css";
 import PostCard from "./PostCard";
 import { Modal, Grow, CircularProgress } from "@material-ui/core";
 import { useHttpClient } from "../../../../../customHooks/httpHook";
 import PostModal from "../component/PostModal";
+import { AuthContext } from "../../../../../context/authContext";
 
 const Posts = () => {
   const { sendRequest, isLoading } = useHttpClient();
@@ -12,10 +13,13 @@ const Posts = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const modalOpenHandler = () => setModalOpen(true);
   const modalCloseHandler = () => setModalOpen(false);
+  const { institute } = useContext(AuthContext);
 
   useEffect(() => {
     setTimeout(() => {
-      sendRequest(process.env.REACT_APP_BASE_URL + "/post/getPosts")
+      sendRequest(
+        process.env.REACT_APP_BASE_URL + "/post/getPosts/" + institute
+      )
         .then((res) => {
           if (res.ok) {
             setData(res.posts);

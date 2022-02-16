@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import style from "../../../style/NewsScroll.module.css";
+import style from "../../../style/ProfileScroll.module.css";
 import DoubleArrowRoundedIcon from "@material-ui/icons/DoubleArrowRounded";
 
 export default (props) => {

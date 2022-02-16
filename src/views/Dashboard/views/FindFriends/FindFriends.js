@@ -10,6 +10,7 @@ const FindFriends = () => {
   const { sendRequest, isLoading } = useHttpClient();
   const auth = useContext(AuthContext);
   const [users, setUsers] = useState([]);
+  console.log(users);
   useEffect(() => {
     sendRequest(
       process.env.REACT_APP_BASE_URL + "/auth/getAllUsers/" + auth.userId
@@ -39,7 +40,6 @@ const FindFriends = () => {
     );
   });
 
-  console.log(contents);
   return (
     <div className={style.container}>
       {isLoading && <CircularProgress style={{ color: "ornagered" }} />}
