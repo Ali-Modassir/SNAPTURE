@@ -47,7 +47,7 @@ const ConfirmEmail = () => {
         });
         setUserId(null);
       });
-  }, [userId]);
+  }, [userId, id]);
 
   return (
     <div
@@ -58,7 +58,7 @@ const ConfirmEmail = () => {
         justifyContent: "center",
       }}
     >
-      {isLoading && <CircularProgress />}
+      {isLoading && <CircularProgress style={{ color: "#c3073f" }} />}
       <h3>{!!successMessage ? successMessage : errorMessage}</h3>
     </div>
   );

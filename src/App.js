@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Authentication from "./views/Authentication/views/Authentication";
 //Router
 import {
@@ -36,33 +37,40 @@ const App = () => {
   } = useAuth();
   const { newsData } = useNewsHook();
 
-  let route = null;
-
-  if (!token) {
-    route = (
-      <Switch>
-        <Route path="/auth" exact component={Authentication} />
-        <Route path="/auth/confirm/:id" component={ConfirmEmail} />
-        <Route path="/auth/forgotPassword" exact component={ForgotPassword} />
-        <Route path="/auth/reset/:resetToken" exact component={ResetPassword} />
-        <Route path="/auth/:token" component={OAuth} />
-        <Redirect to="/auth" />
-      </Switch>
-    );
-  } else if (!userName) {
-    route = (
-      <Switch>
-        <Route path="/onboarding" component={Onboarding} />
-        <Redirect to="/onboarding" />
-      </Switch>
-    );
-  } else
-    route = (
-      <Switch>
-        <Route path="/dash" component={DashLayout} />
-        <Redirect to="/dash" />
-      </Switch>
-    );
+  const [routes, setRoutes] = useState(null);
+  useEffect(() => {
+    var route = null;
+    if (!token) {
+      route = (
+        <Switch>
+          <Route path="/auth" exact component={Authentication} />
+          <Route path="/auth/confirm/:id" component={ConfirmEmail} />
+          <Route path="/auth/forgotPassword" exact component={ForgotPassword} />
+          <Route
+            path="/auth/reset/:resetToken"
+            exact
+            component={ResetPassword}
+          />
+          <Route path="/auth/:token" component={OAuth} />
+          <Redirect to="/auth" />
+        </Switch>
+      );
+    } else if (!userName) {
+      route = (
+        <Switch>
+          <Route path="/onboarding" component={Onboarding} />
+          <Redirect to="/onboarding" />
+        </Switch>
+      );
+    } else
+      route = (
+        <Switch>
+          <Route path="/dash" component={DashLayout} />
+          <Redirect to="/dash" />
+        </Switch>
+      );
+    setRoutes(route);
+  }, [token, userName]);
 
   return (
     <>
@@ -85,7 +93,7 @@ const App = () => {
             newsData,
           }}
         >
-          <Router>{route}</Router>
+          <Router>{routes}</Router>
         </NewsContext.Provider>
       </AuthContext.Provider>
     </>

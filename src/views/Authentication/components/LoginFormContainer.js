@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { CircularProgress } from "@material-ui/core";
 
@@ -70,7 +70,7 @@ const LoginFormContainer = () => {
         />
       </div>
       {isLoading ? (
-        <CircularProgress style={{ color: "orangered" }} />
+        <CircularProgress style={{ color: "#c3073f" }} />
       ) : (
         <div className={classes.inputWrapper}>
           <button type="submit" className={classes.auth_btn}>

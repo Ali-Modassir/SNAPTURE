@@ -102,7 +102,7 @@ const FormContainer = () => {
         <label>{pswdFrmtErr}</label>
       </div>
       {isLoading ? (
-        <CircularProgress style={{ color: "orangered" }} />
+        <CircularProgress style={{ color: "#c3073f" }} />
       ) : (
         <div className={classes.inputWrapper}>
           <button

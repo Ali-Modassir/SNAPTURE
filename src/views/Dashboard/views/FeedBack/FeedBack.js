@@ -48,7 +48,7 @@ const FeedBack = () => {
         />
       </div>
       {isLoading ? (
-        <CircularProgress style={{ color: "orangered" }} />
+        <CircularProgress style={{ color: "#c3073f" }} />
       ) : (
         <button
           className={style.profile_btn}
