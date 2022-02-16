@@ -54,7 +54,6 @@ passport.use(
         const newUser = new User({
           method: "google",
           local: {
-            name: profile.displayName,
             email: profile.emails[0].value,
             password: profile.id,
             confirmed: true,
@@ -117,7 +116,6 @@ passport.use(
         const newUser = new User({
           method: "microsoft",
           local: {
-            name: profile.displayName,
             email: profile.emails[0].value,
             password: profile.id,
             confirmed: true,

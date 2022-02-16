@@ -1,5 +1,5 @@
 const express = require("express");
-const uploadImage = require("../googleStorage/fileUpload");
+const uploadImage = require("../fileUpload/fileUpload");
 const Post = require("../models/Post");
 const AllPost = require("../models/AllPost");
 const { v1: uuid } = require("uuid");
@@ -7,10 +7,11 @@ const { v1: uuid } = require("uuid");
 //create-post
 module.exports.create_post = async (req, res) => {
   try {
-    const { userId, userName, userEmail, caption } = req.body;
+    const { userId, userName, userEmail, caption, location } = req.body;
     const myFile = req.file;
 
-    const imageUrl = await uploadImage(myFile);
+    const image = await uploadImage(myFile);
+    const imageUrl = image.url;
     if (!imageUrl)
       return res
         .status(400)
@@ -43,6 +44,7 @@ module.exports.create_post = async (req, res) => {
       caption,
       postId,
       uploadDate,
+      location,
     };
     const latPost = await AllPost.create(latestPost);
     await latPost.save();
@@ -93,7 +95,10 @@ module.exports.updateLike = async (req, res) => {
 //getAllPost
 module.exports.getPost = async (req, res) => {
   try {
-    const getAllPost = await AllPost.find({}).sort({ createdAt: "desc" });
+    const { location } = req.params;
+    const getAllPost = await AllPost.find({ location }).sort({
+      createdAt: "desc",
+    });
     if (getAllPost.length != 0)
       return res.json({ posts: getAllPost, ok: true });
     else return res.json({ message: "No Post Found", ok: false });
