@@ -47,39 +47,14 @@ const createToken = (id) => {
   });
 };
 
-//password validate
-const validatePassword = (pswd) => {
-  const pswdRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-  return pswdRegex.test(pswd);
-};
-
-//Validate Password
-const validateEmail = (email) => {
-  var re = /\S+@\S+\.\S+/;
-  return re.test(email);
-};
-
 //SignUp Controller
 module.exports.signup_post = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password)
-      return res
-        .status(404)
-        .json({ message: "Please provide all details", ok: false });
-
-    if (!validateEmail(email)) {
-      return res
-        .status(400)
-        .json({ message: "Invalid Email Formal", ok: false });
-    }
-
-    if (!validatePassword(password)) {
-      return res
-        .status(400)
-        .json({ message: "Invalid Password Format", ok: false });
-    }
-
+    const { name, email, institute, password, confirmPassword } = req.body;
+    if (!name || !email || !password || !confirmPassword || !institute)
+      return res.json({ message: "Please Enter all details", ok: false });
+    if (password != confirmPassword)
+      return res.json({ message: "Passwords not matched", ok: false });
     const exsistingUser = await User.findOne({
       "local.email": email,
     });
@@ -89,23 +64,22 @@ module.exports.signup_post = async (req, res, next) => {
         ok: false,
       });
 
-    const hashPswd = await bcrypt.hash(password, 10);
-
+    //Hashsing password
+    const hashPassword = await bcrypt.hash(password, 10);
     const user = await new User({
       method: "local",
-      local: { email, password: hashPswd },
+      local: { name, email, password: hashPassword, institute },
     });
-
     await user.save(); //Saved-User-Data
 
     //Sending-Confirmation-Email
     await sendEmail(
       email,
-      emailTemplates.confirmEmailTemp(user._id, user.local.email)
+      emailTemplates.confirmEmailTemp(user._id, user.local.name)
     );
 
     return res.status(201).json({
-      message: "Email sent!!, Please verify your email to continue",
+      message: "Email sent, Please check your inbox to confirm",
       ok: true,
     });
   } catch (err) {
@@ -130,7 +104,7 @@ module.exports.confirmEmail = async (req, res, next) => {
     const token = createToken(user._id);
     return res.json({
       userId: user._id,
-      userName: user.local.userName,
+      userName: user.local.name,
       userEmail: user.local.email,
       institute: user.local.institute,
       token: token,
@@ -160,7 +134,7 @@ module.exports.login_post = async (req, res, next) => {
       const token = createToken(user._id);
       return res.status(201).json({
         userId: user._id,
-        userName: user.local.userName,
+        userName: user.local.name,
         userEmail: user.local.email,
         institute: user.local.institute,
         token,
@@ -206,7 +180,7 @@ module.exports.forgotPassword = (req, res, next) => {
         //Sending-Reset-Password-Email
         await sendEmail(
           user.local.email,
-          emailTemplates.forgotPswdTemp(token, user.local.userName)
+          emailTemplates.forgotPswdTemp(token, user.local.name)
         );
 
         return res.status(201).json({
@@ -276,7 +250,7 @@ module.exports.getUser = async (req, res, next) => {
     if (user) {
       const jwttoken = createToken(id);
       const data = {
-        userName: user.local.userName,
+        userName: user.local.name,
         userEmail: user.local.email,
         userId: id,
         token: jwttoken,
@@ -293,24 +267,18 @@ module.exports.getUser = async (req, res, next) => {
 
 module.exports.getAllUsers = async (req, res) => {
   try {
-    const { userId, institute } = req.body;
-    const allUsers = await User.find();
-    const reqDetails = [];
-    let idx = 0;
-    allUsers.forEach((user) => {
-      if (user.local.institute != institute || user._id == userId) return;
-      else {
-        const data = {
-          index: idx++,
-          name: user.local.userName,
-          email: user.local.email,
-          institute: user.local.institute,
-          followers: user.local.followers,
-          profilePic: user.local.profilePic,
-          userId: user._id,
-        };
-        reqDetails.push(data);
-      }
+    const { userId } = req.params;
+    const allUsers = await User.find({ _id: { $ne: userId } });
+    const reqDetails = allUsers.map((user, index) => {
+      return {
+        index: index,
+        name: user.local.name,
+        email: user.local.email,
+        institute: user.local.institute,
+        followers: user.local.followers,
+        profilePic: user.local.profilePic,
+        userId: user._id,
+      };
     });
     return res.status(200).json({ users: reqDetails, ok: true });
   } catch (err) {
@@ -371,13 +339,13 @@ module.exports.addFollower = async (req, res) => {
       user.local.friend.push({
         conversationId,
         friendId: personId,
-        friendName: person.local.userName,
+        friendName: person.local.name,
         friendProfilePic: person.local.profilePic,
       });
       person.local.friend.push({
         conversationId,
         friendId: userId,
-        friendName: user.local.userName,
+        friendName: user.local.name,
         friendProfilePic: user.local.profilePic,
       });
       isFriend = true;
