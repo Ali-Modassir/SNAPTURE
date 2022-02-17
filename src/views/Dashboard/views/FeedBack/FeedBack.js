@@ -26,7 +26,7 @@ const FeedBack = () => {
       )
         .then((res) => {
           if (res.ok) {
-            toast.success("Feedback Submitted", { position: "top-right" });
+            toast.success("Feedback Submitted");
             setData({ ...data, description: "" });
           }
         })

@@ -82,103 +82,108 @@ const Message = () => {
         }
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     if (messageEl) {
-      messageEl.current.addEventListener("DOMNodeInserted", (event) => {
+      messageEl.current?.addEventListener("DOMNodeInserted", (event) => {
         const { currentTarget: target } = event;
         target.scroll({ top: target.scrollHeight, behavior: "smooth" });
       });
     }
-  }, []);
+  }, [messageEl]);
 
-  return (
-    <>
-      {friends.length === 0 && (
-        <>
-          <div className={style.heading}>Make friend to start converstion.</div>
-          <div className={style.heading2}>
-            Start making friends from here. . . .
-            <span onClick={() => history.push("/dash/findFriends")}>
-              Find Friends
-            </span>
-          </div>
-        </>
-      )}
-      <div className={style.container}>
-        {isLoading && <CircularProgress style={{ color: "#c3073f" }} />}
-        <div className={style.peopleContainer}>
-          {friends.map((friend, index) => {
-            if (index === 0)
-              if (currFriendId == null) setCurrFriendId(friend.friendId);
-            return (
-              <>
-                <div
-                  className={`${style.people} ${
-                    friend.friendId === currFriendId && style.activeFriend
-                  }`}
-                  onClick={() => chatHandler(friend.friendId)}
-                  key={index}
-                  style={{
-                    "border-radius": index === 0 ? "10px 10px 2px 2px" : "0",
-                  }}
-                >
-                  <Avatar
-                    src={friend.friendProfilePic || "/broken-image.jpg"}
-                    style={{
-                      background: "transparent",
-                      color: "white",
-                      height: "30px",
-                      width: "30px",
-                    }}
-                  />
-                  <div className={style.name}>{friend.friendName}</div>
-                </div>
-              </>
-            );
-          })}
-        </div>
-        <div className={style.chatContainer}>
-          <div className={style.message} ref={messageEl}>
-            {friends.length > 0 && chats.length === 0 && (
-              <div className={style.heading3}>Start Conversation</div>
-            )}
-            {chats.map((chat, index) => {
-              if (chat.userId === userId) {
-                return (
-                  <div className={style.senderContainer} key={index}>
-                    {chat.inpMsg}
-                  </div>
-                );
-              } else {
-                return (
-                  <div className={style.receiverContainer} key={index}>
-                    {chat.inpMsg}
-                  </div>
-                );
-              }
-            })}
-          </div>
-          {conversationId && (
-            <div className={style.inputContainer}>
-              <input
-                type="text"
-                placeholder="Type Message ....."
-                className={style.inputMessage}
-                onChange={(e) => setInpMsg(e.target.value)}
-                value={inpMsg}
-                onKeyPress={handleKeyPress}
-              />
-              <button className={style.messageBtn} onClick={messageSendHandler}>
-                <SendIcon />
-              </button>
-            </div>
-          )}
+  if (friends.length === 0) {
+    return (
+      <div className={style.nofriendsCont}>
+        <div className={style.heading}>Make friend to start converstion.</div>
+        <div className={style.heading2}>
+          Start making friends from here. . . .
+          <span onClick={() => history.push("/dash/findFriends")}>
+            Find Friends
+          </span>
         </div>
       </div>
-    </>
-  );
+    );
+  } else
+    return (
+      <>
+        <div className={style.container}>
+          {isLoading && <CircularProgress style={{ color: "#c3073f" }} />}
+          <div className={style.peopleContainer}>
+            {friends.map((friend, index) => {
+              if (index === 0)
+                if (currFriendId == null) setCurrFriendId(friend.friendId);
+              return (
+                <>
+                  <div
+                    className={`${style.people} ${
+                      friend.friendId === currFriendId && style.activeFriend
+                    }`}
+                    onClick={() => chatHandler(friend.friendId)}
+                    key={index}
+                    style={{
+                      "border-radius": index === 0 ? "10px 10px 2px 2px" : "0",
+                    }}
+                  >
+                    <Avatar
+                      src={friend.friendProfilePic || "/broken-image.jpg"}
+                      style={{
+                        background: "transparent",
+                        color: "white",
+                        height: "30px",
+                        width: "30px",
+                      }}
+                    />
+                    <div className={style.name}>{friend.friendName}</div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+          <div className={style.chatContainer}>
+            <div className={style.message} ref={messageEl}>
+              {friends.length > 0 && chats.length === 0 && (
+                <div className={style.heading3}>Start Conversation</div>
+              )}
+              {chats.map((chat, index) => {
+                if (chat.userId === userId) {
+                  return (
+                    <div className={style.senderContainer} key={index}>
+                      {chat.inpMsg}
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div className={style.receiverContainer} key={index}>
+                      {chat.inpMsg}
+                    </div>
+                  );
+                }
+              })}
+            </div>
+            {conversationId && (
+              <div className={style.inputContainer}>
+                <input
+                  type="text"
+                  placeholder="Type Message ....."
+                  className={style.inputMessage}
+                  onChange={(e) => setInpMsg(e.target.value)}
+                  value={inpMsg}
+                  onKeyPress={handleKeyPress}
+                />
+                <button
+                  className={style.messageBtn}
+                  onClick={messageSendHandler}
+                >
+                  <SendIcon />
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </>
+    );
 };
 
 export default Message;

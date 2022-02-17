@@ -12,7 +12,7 @@ import ResetPassword from "./views/Authentication/views/ResetPassword";
 import DashLayout from "./views/Dashboard/DashLayout";
 import Onboarding from "./views/Authentication/views/Onboarding";
 
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmEmail from "./views/Authentication/views/ConfirmEmail";
 import OAuth from "./views/Authentication/views/OAuth";
@@ -74,7 +74,20 @@ const App = () => {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        theme="theme"
+        autoClose={2000}
+        hideProgressBar
+        closeOnClick
+        pauseOnFocusLoss={false}
+        draggable
+        transition={Flip}
+        toastStyle={{
+          backgroundColor: "#1a1a1d",
+          color: "white",
+          border: "2px solid #c3073f",
+        }}
+      />
       <AuthContext.Provider
         value={{
           isLoggedIn: !!token,

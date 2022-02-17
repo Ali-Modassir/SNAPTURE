@@ -24,14 +24,11 @@ const PostModal = ({ mobile }) => {
         formData
       )
         .then((res) => {
-          if (res.ok) toast.success(res.message, { position: "top-right" });
-          else toast.warning(res.message, { position: "top-right" });
-          console.log(res);
+          if (res.ok) toast.success(res.message);
+          else toast.warn(res.message);
         })
         .catch((err) => {
-          toast.error("Something went wrong,Please try again", {
-            position: "top-right",
-          });
+          toast.error("Something went wrong,Please try again");
           console.log(err);
         });
     }, 500);

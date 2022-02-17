@@ -65,16 +65,14 @@ const FormContainer = () => {
         .then((res) => {
           console.log(res);
           if (res.ok) {
-            toast.success(res.message, { position: toast.POSITION.TOP_RIGHT });
+            toast.success(res.message);
           } else {
-            toast.warn(res.message, { position: toast.POSITION.TOP_RIGHT });
+            toast.warn(res.message);
           }
         })
         .catch((err) => {
           console.log(err);
-          toast.error("Something went wrong, Please try again", {
-            position: "top-right",
-          });
+          toast.error("Something went wrong, Please try again");
         });
     }, 500);
   };

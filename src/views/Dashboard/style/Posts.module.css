@@ -14,8 +14,9 @@
 
 .error {
   color: white;
-  font-size: 2rem;
+  font-size: 1.3rem;
   margin-left: 30px;
+  font-family: "Montserrat";
 }
 
 .createPostBtn {
