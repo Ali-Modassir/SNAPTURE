@@ -291,6 +291,7 @@ module.exports.getUser = async (req, res, next) => {
   }
 };
 
+//getting all users by institute
 module.exports.getAllUsers = async (req, res) => {
   try {
     const { userId, institute } = req.body;
@@ -319,6 +320,7 @@ module.exports.getAllUsers = async (req, res) => {
   }
 };
 
+//add Follower Controller
 module.exports.addFollower = async (req, res) => {
   let { query } = req.params;
   query = query.split("=");
@@ -404,6 +406,7 @@ module.exports.addFollower = async (req, res) => {
   }
 };
 
+//getting all friend of a user
 module.exports.getAllFriends = async (req, res) => {
   const { userId } = req.params;
   try {
@@ -416,6 +419,7 @@ module.exports.getAllFriends = async (req, res) => {
   }
 };
 
+//feedback from users
 module.exports.getFeedback = async (req, res) => {
   const { name, email, description } = req.body;
   if (!name || !email || !description)
