@@ -29,7 +29,7 @@ const LoginFormContainer = () => {
       )
         .then((res) => {
           if (res.ok) {
-            toast.success("Logged In", { position: "top-right" });
+            toast.success("Logged In");
             auth.login(
               res.userName,
               res.userEmail,
@@ -38,14 +38,12 @@ const LoginFormContainer = () => {
               res.token
             );
           } else {
-            toast.warn(res.message, { position: "top-right" });
+            toast.warn(res.message);
           }
         })
         .catch((err) => {
           console.log(err);
-          toast.error("Something went wrong, Please try again", {
-            position: "top-right",
-          });
+          toast.error("Something went wrong, Please try again");
         });
     }, 500);
   };

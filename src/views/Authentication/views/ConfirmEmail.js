@@ -25,7 +25,7 @@ const ConfirmEmail = () => {
       .then((res) => {
         if (res.ok) {
           setSuccessMessage(res.message);
-          toast.success(res.message, { position: "top-right" });
+          toast.success(res.message);
           auth.login(
             res.userName,
             res.userEmail,
@@ -35,16 +35,14 @@ const ConfirmEmail = () => {
           );
         } else {
           setErrorMessage(res.message);
-          toast.warn(res.message, { position: "top-right" });
+          toast.warn(res.message);
           history.push("/auth");
         }
       })
       .catch((err) => {
         console.log(err);
         setErrorMessage("Something went wrong");
-        toast.error("Something went wrong", {
-          position: "top-center",
-        });
+        toast.error("Something went wrong");
         setUserId(null);
       });
   }, [userId, id]);

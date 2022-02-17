@@ -21,13 +21,13 @@ const ProfileForm = () => {
     )
       .then((res) => {
         if (res.ok) {
-          toast.success(res.message, { position: "top-right" });
+          toast.success(res.message);
         } else {
-          toast.warn(res.message, { position: "top-right" });
+          toast.warn(res.message);
         }
       })
       .catch((err) => {
-        toast.error("Unable to update profile", { position: "top-right" });
+        toast.error("Unable to update profile");
         console.log(err);
       });
   };

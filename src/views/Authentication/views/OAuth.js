@@ -16,7 +16,7 @@ const OAuth = () => {
         .then((response) => {
           console.log(response);
           if (response.ok) {
-            toast.success("Logged In", { position: "top-right" });
+            toast.success("Logged In");
             auth.login(
               response.userName,
               response.userEmail,
@@ -25,7 +25,7 @@ const OAuth = () => {
               response.token
             );
           } else {
-            toast.error(response.message, { position: "top-right" });
+            toast.error(response.message);
           }
         })
         .catch((err) => {

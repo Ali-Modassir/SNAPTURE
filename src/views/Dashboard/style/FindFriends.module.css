@@ -5,3 +5,20 @@
   align-items: center;
   flex-direction: column;
 }
+
+.nofriendsCont {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.heading {
+  font-size: 1.3rem;
+  margin: auto auto;
+  color: white;
+}
+
+.heading2 {
+  font-size: 1rem;
+  color: #737379;
+}
