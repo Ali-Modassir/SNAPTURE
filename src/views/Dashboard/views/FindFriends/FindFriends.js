@@ -35,12 +35,23 @@ const FindFriends = () => {
         institute={user.institute}
         email={user.email}
         followers={user.followers}
-        userId={user.userId}
+        userId={userId}
         followerId={user.userId}
         key={index}
       />
     );
   });
+
+  if (users.length === 0) {
+    return (
+      <div className={style.nofriendsCont}>
+        <div className={style.heading}>Oops!!</div>
+        <div className={style.heading2}>
+          No friends from your institute, is a member of Snapture
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={style.container}>

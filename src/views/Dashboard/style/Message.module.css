@@ -145,6 +145,12 @@
   background-color: #29292b;
 }
 
+.nofriendsCont {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
 @media (max-width: 500px) {
   .container {
     flex-direction: column;

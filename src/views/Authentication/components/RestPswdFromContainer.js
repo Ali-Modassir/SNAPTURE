@@ -27,17 +27,15 @@ const RestPswdFromContainer = () => {
       )
         .then((res) => {
           if (res.ok) {
-            toast.success(res.message, { position: "top-right" });
+            toast.success(res.message);
             history.push("/auth");
           } else {
-            toast.warn(res.message, { position: "top-right" });
+            toast.warn(res.message);
           }
         })
         .catch((err) => {
           console.log(err);
-          toast.error("Something went wrong, Please try again", {
-            position: "top-right",
-          });
+          toast.error("Something went wrong, Please try again");
         });
     }, 500);
   };
