@@ -62,7 +62,7 @@ module.exports.getPost = async (req, res) => {
   try {
     const { location } = req.params;
     const getAllPost = await AllPost.find({ location }).sort({
-      createdAt: "desc",
+      uploadDate: -1,
     });
     if (getAllPost.length != 0)
       return res.json({ posts: getAllPost, ok: true });
