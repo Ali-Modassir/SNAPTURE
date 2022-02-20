@@ -53,13 +53,7 @@ mongoose
     useCreateIndex: true,
     useFindAndModify: false,
   })
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`MongoDB Connected and Connection started at ${PORT}`);
-      console.log(`Local -> http://localhost:8000`);
-      console.log(`Client Origin -> ${process.env.CLIENT_ORIGIN}`);
-    });
-  })
+  .then(() => app.listen(PORT))
   .catch((error) => {
     console.log(error);
   });
