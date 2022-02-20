@@ -1,5 +1,5 @@
 .profileCard {
-  height: 40vh;
+  height: 400px;
   width: 25%;
   min-width: 280px;
   border-radius: 20px;
@@ -73,7 +73,7 @@
 
 @media (max-width: 500px) {
   .profileCard {
-    height: 40vh;
+    height: 400px;
     margin-bottom: 50px;
   }
   .name {

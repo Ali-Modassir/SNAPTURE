@@ -27,7 +27,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 80vh;
+  height: 680px;
   margin: auto auto;
 }
 
@@ -163,7 +163,7 @@
   }
   .card_right {
     width: 100%;
-    height: 60vh;
+    height: 600px;
   }
   .card_left {
     display: none;
