@@ -5,10 +5,12 @@ import { Avatar } from "@material-ui/core";
 import { useHttpClient } from "../../../../../customHooks/httpHook";
 import { AuthContext } from "../../../../../context/authContext";
 import moment from "moment";
+import LazyBackground from "../../../components/LazyBackground";
 
 const PostCard = ({ props }) => {
   const { userName, imageUrl, caption, like, postId, userId, uploadDate } =
     props;
+  console.log(imageUrl);
   const auth = useContext(AuthContext);
   const userLikedId = auth.userId;
   var set = new Set(like);
@@ -60,7 +62,7 @@ const PostCard = ({ props }) => {
         />
         <div className={style.profileName}>{userName}</div>
       </div>
-      <img src={imageUrl} alt="post" className={style.image} />
+      <LazyBackground src={imageUrl} alt="post" styles={style.image} />
       <div className={style.postCardDetails}>
         <div className={style.caption}>{caption}</div>
         <div className={style.like}>

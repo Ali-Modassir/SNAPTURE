@@ -2,10 +2,10 @@
   background-color: #1a1a1d;
   display: flex;
   width: 30%;
-  height: 70%;
+  height: 700px;
   margin: auto auto;
-  margin-top: 17vh;
-  border-radius: 100px;
+  margin-top: 50px;
+  border-radius: 30px;
   min-width: 350px;
 }
 

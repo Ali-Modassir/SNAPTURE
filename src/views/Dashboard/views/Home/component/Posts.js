@@ -21,17 +21,12 @@ const Posts = () => {
         process.env.REACT_APP_BASE_URL + "/post/getPosts/" + institute
       )
         .then((res) => {
-          if (res.ok) {
-            setData(res.posts);
-          } else {
-            setError(res.message);
-          }
+          if (res.ok) setData(res.posts);
+          else setError(res.message);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     }, 500);
-  }, [institute]);
+  }, [institute, modalOpen]);
 
   var posts = null;
   if (data) {
